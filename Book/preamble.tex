@@ -1,24 +1,52 @@
-\usepackage{graphicx}
-\usepackage{lipsum}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{float}
-\usepackage{tabularx}
-\usepackage{xspace}
-\usepackage{tipa}
-\usepackage{dirtree}
-\usepackage{url}
-\usepackage{color}
-\usepackage{tabularx}
-\usepackage{longtable}
-\usepackage{ltablex}
-\keepXColumns
-\usepackage{booktabs}
-\usepackage{array}
+%\usepackage{graphicx}
+%\usepackage{lipsum}
+%\usepackage{amsmath}
+%\usepackage{amsfonts}
+%\usepackage{amssymb}
+%\usepackage{float}
+%\usepackage{tabularx}
+%\usepackage{xspace}
+%\usepackage{tipa}
+%\usepackage{dirtree}
+%\usepackage{url}
+%\usepackage{color}
+%\usepackage{tabularx}
+%\usepackage{longtable}
+%\usepackage{ltablex}
+%\keepXColumns
+%\usepackage{booktabs}
+%\usepackage{array}
+%
+%\usepackage[toc,page]{appendix}
+%\usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref}
 
-\usepackage[toc,page]{appendix}
-\usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref}
+% === preamble.tex ===
+
+% Basic packages
+\usepackage{fontspec}        % XeLaTeX only
+\usepackage{polyglossia}     % multilingual
+\setmainlanguage{english}
+
+% Table packages
+\usepackage{longtable}       % multipage tables
+\usepackage{tabularx}        % adjustable-width columns
+\usepackage{ltablex}         % cross of longtable+tabularx
+\keepXColumns
+
+% Graphics
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+
+% Floats
+\usepackage{float}
+
+% Misc
+\usepackage{lipsum}          % dummy text
+\usepackage{booktabs}        % nice tables
+
+% Optional: for subfile editing
+\usepackage{subfiles}        % allows chapters to compile independently
+
 
 
 \graphicspath{
