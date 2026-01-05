@@ -1,3 +1,6 @@
-\contentsline {part}{I\hspace {1em}Foundations}{1}{}%
+\xpg@aux {}{english}
+\contentsline {part}{I\hspace {1em}Foundations. Philosophy and Mathematics}{1}{}%
 \contentsline {chapter}{\numberline {1}Cats!}{2}{}%
-\contentsline {part}{II\hspace {1em}Applications}{3}{}%
+\contentsline {part}{II\hspace {1em}Geofiltration systems}{3}{}%
+\contentsline {part}{III\hspace {1em}Model Zoo}{4}{}%
+\contentsline {chapter}{\numberline {2}Model Zoo}{5}{}%
