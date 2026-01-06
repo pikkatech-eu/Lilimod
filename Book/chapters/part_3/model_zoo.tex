@@ -5,7 +5,26 @@
 
 \chapter{Model Zoo}
 
-
+	\section{Homogeneous aquifers}
+	Table \ref{tab:model-zoo homogeneous schemes} contains a few schemes of homogeneous aquifers. For simplicity, the schemes were assigned numerical and literal codes following the following pattern:
+	
+	\begin{tabularx}{0.95\textwidth}{|X|X|X|}
+		\hline
+		Aquifer Geometry	& Numerical Code & Literal Code		\\
+		\hline
+		Infinite		& I & 0	\\
+		Semi-Infinite	& S	& 1	\\
+		Quadrant		& Q	& 2	\\
+		Band			& B	& 3	\\
+		Half-band		& H	& 4	\\
+		Rectangle		& R	& 5	\\
+		Wedge			& W	& 6	\\
+		Circle			& C	& 7	\\
+		\hline
+	\end{tabularx}
+	
+	In the literal codes of the aquifers the first letter is the literal code pertaining to the geometry, followed by a combination of \textit{r} and \textit{i} letters, where \textit{r} corresponds to a recharge boundary, \textit{i} to an impermeable boundary.
+	
 \begin{table}
 	\label{tab:model-zoo homogeneous schemes}
 	\centering
@@ -13,7 +32,7 @@
 	Blue lines: recharge boundaries, red lines: impermeable boundaries. }
 \begin{longtable}{|c|l|l|p{0.5\textwidth}|}
 	\hline
-	Scheme	&  Number code	& Letter code & Description \\
+	Scheme	&  Number code	& Literal code & Description \\
 	\hline
 	\includegraphics[width=0.15\linewidth]{figures/part_3/I} & 0 & I & Infinite aquifer \\
 	\hline
