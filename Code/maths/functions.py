@@ -12,6 +12,7 @@ def erfc(x: float) -> float:
 	Source:     Abramowitz and Steagun 7.1.28 (http://www.math.sfu.ca/%7Ecbm/aands/page_299.htm)
 	Calculates the function directly using uniform approximations from Abramowitz and Steagun for 0 <= x <= 3.5
 	and asymptotic expansions for x >= 3.5. For x < 0 erfx(x) = 2 - erfc(-x).
+	DEPRECATED: Use scipy.special.erfc instead!
     :param x:   Argument
     :return:    The value of erfc.
     """
@@ -25,6 +26,7 @@ def erfc(x: float) -> float:
 def erf(x: float) -> float:
     """
     Definition: Abramowitz and Steagun 7.1.1    (http://www.math.sfu.ca/%7Ecbm/aands/page_297.htm)
+    DEPRECATED: Use scipy.special.erfc instead!
     :param x:   Argument
     :return:    The value of erf.
     """
@@ -35,6 +37,7 @@ def ierfc(x: float) -> float:
     Repeated Integral of the Error function of real argument.
 	Definition: Abramowitz & Steagun 7.2    (http://www.math.sfu.ca/%7Ecbm/aands/page_299.htm)
 	Source:     Abramowitz & Steagun 7.2.1  (http://www.math.sfu.ca/%7Ecbm/aands/page_299.htm)
+	TODO:       Rewrite using scipy.special.erfc.
     :param x:   Argument
     :return:    The value of ierfc.
     """
@@ -45,6 +48,7 @@ def i2erfc(x: float) -> float:
     Doubly Repeated Integral of the Error function of real argument.
 	Definition: Abramowitz & Steagun 7.2    (http://www.math.sfu.ca/%7Ecbm/aands/page_299.htm)
 	Source:     Abramowitz & Steagun 7.2.1  (http://www.math.sfu.ca/%7Ecbm/aands/page_299.htm)
+	TODO:       Rewrite using scipy.special.erfc.
     :param x:   Argument
     :return:    The value of i2erfc.
     """
@@ -55,6 +59,7 @@ def inerfc(x: float, n: int) -> float:
     Repeated Integral of the Error function of real argument.
 	Definition: Abramowitz & Steagun 7.2    (http://www.math.sfu.ca/%7Ecbm/aands/page_299.htm)
 	Source:     Abramowitz & Steagun 7.2.1  (http://www.math.sfu.ca/%7Ecbm/aands/page_299.htm)
+	TODO:       Rewrite using scipy.special.erfc.
     :param x:   Argument
     :param n:   Function Order
     :return:    The value of inerfc.
@@ -77,6 +82,7 @@ def cerfc(z: float, alpha: float) -> float:
     """
     Diffusion cosine, or Hantush's first depletion function.
 	Source: Hantush, M.S., "Nonsteady Flow to Flowing Wells in Leaky Aquifers." Jour. Geophys. Res., 64, 8, 1043-1052. 1959.
+	TODO:           Rewrite using scipy.special.erfc.
     :param z:       Argument
     :param alpha:   Parameter
     :return:        The value of cerfc
@@ -96,6 +102,7 @@ def serfc(z: float, alpha: float) -> float:
     """
     Diffusion sine, or Hantush's second depletion function.
 	Source: Hantush, M. S., "Nonsteady Flow to Flowing Wells in Leaky Aquifers." Jour. Geophys. Res., 64, 8, 1043-1052. 1959.
+	TODO:           Rewrite using scipy.special.erfc.
     :param z:       Argument
     :param alpha:   Parameter
     :return:        The value of serfc
@@ -117,6 +124,7 @@ def aerfc(z: float, alpha: float) -> float:
     in leaky and non-leaky homogeneous aquifers.
 	Inverse Laplace transform of exp(-z * sqrt(p/a + g^2)) / (p (p/a + g^2)) is
 	(1/g^2) * aerfc(z/2 sqrt(at), g * z).
+	TODO:           Rewrite using scipy.special.erfc.
     :param z:       Argument
     :param alpha:   Parameter
     :return:        The value of serfc
@@ -169,9 +177,9 @@ def _erfc_asymptotic(x: float) -> float:
 
 def _hantush_series(p: float, q: float) -> float:
     """
-    Calculates the sum of the series \$  \frac{1}{4 \pi} \sum \limits_{n=0}^\infty \frac{(-1)^n}{n!} p^n E_{n+1}(q) \$
+    Calculates the sum of the series $  \frac{1}{4 \pi} \sum \limits_{n=0}^\infty \frac{(-1)^n}{n!} p^n E_{n+1}(q) $
     :param p:   Argument acting as the argument of the power series
-    :param q:   Argument of the integral exponential \$  E_{n+1} \$
+    :param q:   Argument of the integral exponential $  E_{n+1} $
     :return:    Value of the Hantush series, if q > 0, Float.PositiveInfinity otherwise.
     """
     if q <= 0:
@@ -199,8 +207,6 @@ def _hantush_series(p: float, q: float) -> float:
 #endregion
 
 if __name__ == '__main__':
-    z = 0.5 + 0.6j
 
-    r = scipy.special.iv(4, z)
-
-    print(r)
+    t = 0.5
+    print(ierfc(t), scipy.special.erfc(t, ))
