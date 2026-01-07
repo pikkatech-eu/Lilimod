@@ -64,102 +64,94 @@ ISEGER_COEFFICIENTS_48 = [
     (476.4483318696360, 1494.71066227687),
 ]
 
-class DenIseger:
-    def __init__(self):
-        pass
+def invert\
+            (
+                laplace_image: callable,
+                delta_t: float,
+                number_of_values: int,
+                critical_abscissa: float = 0,
+                quadrature_degree: int = 16
+            ):
+    """
+    Computes the values of the Laplace original for a given Laplace image
+    and a sequence of values of the time argument with given step.
+    :param laplace_image:       The Laplace image, F(z: complex) -> complex.
+    :param delta_t:             The time step for the values of original.
+    :param number_of_values:    The number of output values of the original,
+                                should be a power of 2.
+    :param critical_abscissa:   The critical abscissa for the Laplace image
+                                which is the value of an abscissa in the complex plane
+                                such that c is greater than the real part of all singularities
+                                of the  Laplace image (https://en.wikipedia.org/wiki/Inverse_Laplace_transform).
+    :param quadrature_degree:   The degree of Gauss quadrature (supported values are 16, 32, 48).
+    :return:                    Array of values of the original function in points k * deltaT, k = 0, ..., m.
+    """
+    if delta_t <= 0:
+        raise ArithmeticError(f"The value of time step is invalid: {delta_t}.")
 
-    def get_values\
-                    (
-                        self,
-                        laplace_image: callable,
-                        delta_t: float,
-                        number_of_values: int,
-                        critical_abscissa: float = 0,
-                        quadrature_degree: int = 16
-                    ):
-        """
-        Computes the values of the Laplace original for a given Laplace image
-        and a sequence of values of the time argument with given step.
-        :param laplace_image:       The Laplace image, F(z: complex) -> complex.
-        :param delta_t:             The time step for the values of original.
-        :param number_of_values:    The number of output values of the original,
-                                    should be a power of 2.
-        :param critical_abscissa:   The critical abscissa for the Laplace image
-                                    which is the value of an abscissa in the complex plane
-                                    such that c is greater than the real part of all singularities
-                                    of the  Laplace image (https://en.wikipedia.org/wiki/Inverse_Laplace_transform).
-        :param quadrature_degree:   The degree of Gauss quadrature (supported values are 16, 32, 48).
-        :return:                    Array of values of the original function in points k * deltaT, k = 0, ..., m.
-        """
-        if delta_t <= 0:
-            raise ArithmeticError(f"The value of time step is invalid: {delta_t}.")
+    if number_of_values < 2:
+        raise ArithmeticError(f"The number of output values is invalid: {number_of_values} (must be >= 2).")
 
-        if number_of_values < 2:
-            raise ArithmeticError(f"The number of output values is invalid: {number_of_values} (must be >= 2).")
+    if quadrature_degree not in [16, 32, 48]:
+        raise ValueError(f"The number of quadrature nodes {quadrature_degree} is not supported. Must be 16, 32, or 48.")
 
-        if quadrature_degree not in [16, 32, 48]:
-            raise ValueError(f"The number of quadrature nodes {quadrature_degree} is not supported. Must be 16, 32, or 48.")
+    m = number_of_values
+    mm = 2
 
-        m = number_of_values
-        mm = 2
+    while mm <= number_of_values:
+        mm *= 2
 
-        while mm <= number_of_values:
-            mm *= 2
+    if mm < number_of_values:
+        mm *= 2
 
-        if mm < number_of_values:
-            mm *= 2
+    number_of_values = mm
+    m2 = 8 * number_of_values
+    b = 44.0 / m2
+    coefficients = ISEGER_COEFFICIENTS_16
 
-        number_of_values	= mm
-        m2					= 8 * number_of_values
-        b				    = 44.0 / m2
-        coefficients        = ISEGER_COEFFICIENTS_16
+    match quadrature_degree:
+        case 32:
+            coefficients = ISEGER_COEFFICIENTS_32
+        case 48:
+            coefficients = ISEGER_COEFFICIENTS_48
 
-        match quadrature_degree:
-            case 32:
-                coefficients = ISEGER_COEFFICIENTS_32
-            case 48:
-                coefficients = ISEGER_COEFFICIENTS_48
+    y = [0.0] * (m + 1)
 
+    image_values = [0 + 0j] * (m2 + 1)
 
-        y = [0.0] * (m + 1)
+    for k in range(m2 + 1):
+        sum = 0
 
-        image_values = [0 + 0j] * (m2 + 1)
+        for j in range(int(quadrature_degree / 2)):
+            z = b + (0 + 1j) * (coefficients[j][1] + 2.0 * math.pi * k / m2)
+            z = critical_abscissa + z / delta_t
+            sum += coefficients[j][0] * laplace_image(z).real
 
-        for k in range(m2 +1):
-            sum = 0
+        image_values[k] = 2.0 * sum / delta_t
 
-            for j in range(int(quadrature_degree / 2)):
-                z = b + (0 + 1j) * (coefficients[j][1] + 2.0 * math.pi * k / m2)
-                z = critical_abscissa + z / delta_t
-                sum += coefficients[j][0] * laplace_image(z).real
+    image_values[0] = (image_values[0] + image_values[m2]) / 2.0
 
-            image_values[k] = 2.0 * sum / delta_t
+    inverse_fft = numpy.fft.ifft(image_values)
 
-        image_values[0] = (image_values[0] + image_values[m2]) / 2.0
+    m4 = int(m2 / 4)
 
-        inverse_fft = numpy.fft.ifft(image_values)
+    result = [0.0] * number_of_values
 
-        m4 = int(m2 / 4)
+    for j in range(number_of_values):
+        exp_arg = b * j
 
-        result = [0.0] * number_of_values
+        if critical_abscissa > 0:
+            exp_arg += critical_abscissa * (j * delta_t)
 
-        for j in range(number_of_values):
-            exp_arg = b * j
+        result[j] = inverse_fft[j] * math.exp(exp_arg) / m4
 
-            if critical_abscissa > 0:
-                exp_arg += critical_abscissa * (j * delta_t)
-
-            result[j] = inverse_fft[j] * math.exp(exp_arg) / m4
-
-        return result
+    return result
 
 if __name__ == '__main__':
 
     def image(p: complex) -> complex:
         return 1.0 / (1 + p)
 
-    di = DenIseger()
+    result = invert(image, 0.1, 10)
 
-    result = di.get_values(image, 0.1, 10);
-    
     print(result)
