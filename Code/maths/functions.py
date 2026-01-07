@@ -1,43 +1,16 @@
 import math
 import scipy
 import numpy as np
+from scipy.special import erfc, exp1, k0
 from numpy.polynomial import Polynomial
 from constants import one_over_sqrt_pi
 
 #region Error functions
-def erfc(x: float) -> float:
-    """
-    Error function of real argument.
-    Definition: Abramowitz and Steagun 7.1    (http://www.math.sfu.ca/%7Ecbm/aands/page_297.htm)
-	Source:     Abramowitz and Steagun 7.1.28 (http://www.math.sfu.ca/%7Ecbm/aands/page_299.htm)
-	Calculates the function directly using uniform approximations from Abramowitz and Steagun for 0 <= x <= 3.5
-	and asymptotic expansions for x >= 3.5. For x < 0 erfx(x) = 2 - erfc(-x).
-	DEPRECATED: Use scipy.special.erfc instead!
-    :param x:   Argument
-    :return:    The value of erfc.
-    """
-    if x < 0.0:
-        return 2.0 - erfc(-x)
-    elif x <= 3.5:
-        return _erfc_of_small_positive(x)
-    else:
-        return _erfc_asymptotic(x)
-
-def erf(x: float) -> float:
-    """
-    Definition: Abramowitz and Steagun 7.1.1    (http://www.math.sfu.ca/%7Ecbm/aands/page_297.htm)
-    DEPRECATED: Use scipy.special.erfc instead!
-    :param x:   Argument
-    :return:    The value of erf.
-    """
-    return 1.0 - erfc(x)
-
 def ierfc(x: float) -> float:
     """
     Repeated Integral of the Error function of real argument.
 	Definition: Abramowitz & Steagun 7.2    (http://www.math.sfu.ca/%7Ecbm/aands/page_299.htm)
 	Source:     Abramowitz & Steagun 7.2.1  (http://www.math.sfu.ca/%7Ecbm/aands/page_299.htm)
-	TODO:       Rewrite using scipy.special.erfc.
     :param x:   Argument
     :return:    The value of ierfc.
     """
@@ -48,7 +21,6 @@ def i2erfc(x: float) -> float:
     Doubly Repeated Integral of the Error function of real argument.
 	Definition: Abramowitz & Steagun 7.2    (http://www.math.sfu.ca/%7Ecbm/aands/page_299.htm)
 	Source:     Abramowitz & Steagun 7.2.1  (http://www.math.sfu.ca/%7Ecbm/aands/page_299.htm)
-	TODO:       Rewrite using scipy.special.erfc.
     :param x:   Argument
     :return:    The value of i2erfc.
     """
@@ -59,7 +31,6 @@ def inerfc(x: float, n: int) -> float:
     Repeated Integral of the Error function of real argument.
 	Definition: Abramowitz & Steagun 7.2    (http://www.math.sfu.ca/%7Ecbm/aands/page_299.htm)
 	Source:     Abramowitz & Steagun 7.2.1  (http://www.math.sfu.ca/%7Ecbm/aands/page_299.htm)
-	TODO:       Rewrite using scipy.special.erfc.
     :param x:   Argument
     :param n:   Function Order
     :return:    The value of inerfc.
@@ -82,7 +53,6 @@ def cerfc(z: float, alpha: float) -> float:
     """
     Diffusion cosine, or Hantush's first depletion function.
 	Source: Hantush, M.S., "Nonsteady Flow to Flowing Wells in Leaky Aquifers." Jour. Geophys. Res., 64, 8, 1043-1052. 1959.
-	TODO:           Rewrite using scipy.special.erfc.
     :param z:       Argument
     :param alpha:   Parameter
     :return:        The value of cerfc
@@ -102,7 +72,6 @@ def serfc(z: float, alpha: float) -> float:
     """
     Diffusion sine, or Hantush's second depletion function.
 	Source: Hantush, M. S., "Nonsteady Flow to Flowing Wells in Leaky Aquifers." Jour. Geophys. Res., 64, 8, 1043-1052. 1959.
-	TODO:           Rewrite using scipy.special.erfc.
     :param z:       Argument
     :param alpha:   Parameter
     :return:        The value of serfc
@@ -124,10 +93,9 @@ def aerfc(z: float, alpha: float) -> float:
     in leaky and non-leaky homogeneous aquifers.
 	Inverse Laplace transform of exp(-z * sqrt(p/a + g^2)) / (p (p/a + g^2)) is
 	(1/g^2) * aerfc(z/2 sqrt(at), g * z).
-	TODO:           Rewrite using scipy.special.erfc.
     :param z:       Argument
     :param alpha:   Parameter
-    :return:        The value of serfc
+    :return:        The value of aerfc.
     """
     return cerfc(z, alpha) - math.exp(-0.25 * alpha**2 / (z**2)) * erfc(z)
 #endregion
@@ -135,46 +103,15 @@ def aerfc(z: float, alpha: float) -> float:
 #region Hantushian
 def hantush(z: float, u: float) -> float:
     if z < np.finfo(np.float32):
-        return (1.0 / (2 * math.pi)) * scipy.special.k0(math.sqrt(u))
+        return (1.0 / (2 * math.pi)) * k0(math.sqrt(u))
     elif abs(z) < abs(u / (4.0 * z)):
-        return (1.0 / (2 * math.pi)) * scipy.special.k0(math.sqrt(u)) - _hantush_series(z, u / (4.0 * z))
+        return (1.0 / (2 * math.pi)) * k0(math.sqrt(u)) - _hantush_series(z, u / (4.0 * z))
     else:
         return _hantush_series(u / (4.0 * z), z)
 
 #endregion
 
 #region Protected Auxiliary
-def _erfc_of_small_positive(x: float) -> float:
-    """
-    Calculates the value of erfc(x) for 0.0 <= x <= 3.5
-    Definition: Abramowitz and Steagun 7.1    (http://www.math.sfu.ca/%7Ecbm/aands/page_297.htm)
-    Source:     Abramowitz and Steagun 7.1.28 (http://www.math.sfu.ca/%7Ecbm/aands/page_299.htm)
-    :param x:   Argument
-    :return:    value of erfc(x) calculated
-    """
-    a = [1.0, 0.0705230784, 0.0422820123, 0.0092705272, 0.00015220143, 0.0002765672, 0.0000430638]
-    p = Polynomial(a)(x)
-    return 1.0 / p**16
-
-def _erfc_asymptotic(x: float) -> float:
-    """
-    Calculates erfc(x) for big x along with the asymptotic formula (7.1.23) from Abramowitz & Steagun
-	with a given number of terms in the asymptotic expansion.
-    :param x:   Argument
-    :return:    Asymptotic approximation for erfc(x)
-    """
-    sum = 1.0
-    u = 0.5 / x**2
-    term = -u
-
-    number_of_terms = 5
-
-    for m in range(1, number_of_terms):
-        sum += term
-        term *= -term * (2 * m + 1) * u
-
-        return sum * one_over_sqrt_pi * math.exp(-x**2) / x
-
 def _hantush_series(p: float, q: float) -> float:
     """
     Calculates the sum of the series $  \frac{1}{4 \pi} \sum \limits_{n=0}^\infty \frac{(-1)^n}{n!} p^n E_{n+1}(q) $
@@ -189,7 +126,7 @@ def _hantush_series(p: float, q: float) -> float:
     factor = 1.0
     n = 0
 
-    E = scipy.special.exp1(q)
+    E = exp1(q)
     term = float('inf')
     epsilon = min(np.finfo(np.float32), math.exp(-p) * E)
 
@@ -209,4 +146,4 @@ def _hantush_series(p: float, q: float) -> float:
 if __name__ == '__main__':
 
     t = 0.5
-    print(ierfc(t), scipy.special.erfc(t, ))
+    print(ierfc(t), erfc(t))
