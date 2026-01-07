@@ -199,6 +199,8 @@ def _hantush_series(p: float, q: float) -> float:
 #endregion
 
 if __name__ == '__main__':
-    x = 0.5
+    z = 0.5 + 0.6j
 
-    print(inerfc(x, 5))
+    r = scipy.special.iv(4, z)
+
+    print(r)
