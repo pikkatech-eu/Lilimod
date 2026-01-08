@@ -1,12 +1,12 @@
+import math
+import numpy as np
+import numpy.fft
+
 """
 Iseger's coefficients for the three supported numbers of integration nodes: 16, 32, 48.
 In the pair (alpha, lambda) alpha is the abscissa of the node, lambda its weight in the summation.
 Borrowed from: https://www.cs.hs-rm.de/~weber/lapinv/deniseger/deniseger.htm
 """
-import math
-
-import numpy.fft
-
 ISEGER_COEFFICIENTS_16 = [
     (1.00000000000000, 0),
     (1.00000000000004, 6.28318530717958),
@@ -38,40 +38,40 @@ ISEGER_COEFFICIENTS_32 = [
 ]
 
 ISEGER_COEFFICIENTS_48 = [
-    (1.00000000000000,  0),
-    (1.00000000000000,  6.28318530717957),
-    (1.00000000000000,  12.5663706143592),
-    (1.00000000000000,  18.8495559215388),
-    (1.00000000000000,  25.1327412287183),
-    (1.00000000000000,  31.4159265358979),
-    (1.00000000000000,  37.6991118430775),
-    (1.00000000000000,  43.9822971502571),
-    (1.00000000000000,  50.2654824574367),
-    (1.00000000000234,  56.5486677646182),
-    (1.00000000319553,  62.8318530747628),
-    (1.00000128757818,  69.1150398188909),
-    (1.00016604436873,  75.3984537709689),
-    (1.00682731991922,  81.6938697567735),
-    (1.08409730759702,  88.1889420301504),
-    (1.36319173228680,  95.7546784637379),
-    (1.85773538601497,  105.767553649199),
-    (2.59022367414073,  119.58751936774),
-    (3.73141804564276,  139.158762677521),
-    (5.69232680539143,  168.156165377339),
-    (9.54600616545647,  214.521886792255),
-    (18.8912132110256,  298.972429369901),
-    (52.7884611477405,  497.542914576338),
+    (1.00000000000000, 0),
+    (1.00000000000000, 6.28318530717957),
+    (1.00000000000000, 12.5663706143592),
+    (1.00000000000000, 18.8495559215388),
+    (1.00000000000000, 25.1327412287183),
+    (1.00000000000000, 31.4159265358979),
+    (1.00000000000000, 37.6991118430775),
+    (1.00000000000000, 43.9822971502571),
+    (1.00000000000000, 50.2654824574367),
+    (1.00000000000234, 56.5486677646182),
+    (1.00000000319553, 62.8318530747628),
+    (1.00000128757818, 69.1150398188909),
+    (1.00016604436873, 75.3984537709689),
+    (1.00682731991922, 81.6938697567735),
+    (1.08409730759702, 88.1889420301504),
+    (1.36319173228680, 95.7546784637379),
+    (1.85773538601497, 105.767553649199),
+    (2.59022367414073, 119.58751936774),
+    (3.73141804564276, 139.158762677521),
+    (5.69232680539143, 168.156165377339),
+    (9.54600616545647, 214.521886792255),
+    (18.8912132110256, 298.972429369901),
+    (52.7884611477405, 497.542914576338),
     (476.4483318696360, 1494.71066227687),
 ]
 
-def invert\
-            (
+def invert \
+                (
                 laplace_image: callable,
                 delta_t: float,
                 number_of_values: int,
                 critical_abscissa: float = 0,
                 quadrature_degree: int = 16
-            ):
+        ):
     """
     Computes the values of the Laplace original for a given Laplace image
     and a sequence of values of the time argument with given step.
@@ -85,6 +85,7 @@ def invert\
                                 of the  Laplace image (https://en.wikipedia.org/wiki/Inverse_Laplace_transform).
     :param quadrature_degree:   The degree of Gauss quadrature (supported values are 16, 32, 48).
     :return:                    Array of values of the original function in points k * deltaT, k = 0, ..., m.
+    TODO: Results are wrong; debugging needed!
     """
     if delta_t <= 0:
         raise ArithmeticError(f"The value of time step is invalid: {delta_t}.")
@@ -131,7 +132,7 @@ def invert\
 
     image_values[0] = (image_values[0] + image_values[m2]) / 2.0
 
-    inverse_fft = numpy.fft.ifft(image_values)
+    inverse_fft = numpy.fft.ifft(image_values[:m2]) * (m2 / 2)
 
     m4 = int(m2 / 4)
 
@@ -143,15 +144,25 @@ def invert\
         if critical_abscissa > 0:
             exp_arg += critical_abscissa * (j * delta_t)
 
-        result[j] = inverse_fft[j] * math.exp(exp_arg) / m4
+        result[j] = inverse_fft[j].real * math.exp(exp_arg) / m4
 
     return result
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     def image(p: complex) -> complex:
         return 1.0 / (1 + p)
 
-    result = invert(image, 0.1, 10)
+    delta_t = 0.1
+    number_of_values = 20
+    result = invert(image, delta_t, number_of_values)
 
     print(result)
+
+    for i in range(number_of_values + 1):
+        iseg = result[i]
+        exact = math.exp(- i * delta_t)
+        diff = abs(iseg - exact)
+        percent = diff * 100
+
+        print(f"t={i * delta_t:0.1}\tiseg={iseg}\texact={exact}\tdiff={diff}\tpercent={percent}")
