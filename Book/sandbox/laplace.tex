@@ -1,0 +1,331 @@
+% !TeX program = xelatex
+
+% Chat GPT's universal template for Latin, Cyrillic, Arabic, and Hebrew environments using XeLaTeX.
+
+\documentclass[12pt]{article}
+% ===== Packages ===============================================
+\usepackage{fontspec}     % For OpenType/Unicode fonts
+\usepackage{polyglossia}  % For multilingual support
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{xspace}
+\usepackage{tipa}
+\usepackage{dirtree}
+\usepackage{url}
+\usepackage{color}
+\usepackage[toc,page]{appendix}
+\usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref}
+\usepackage[left=2.30cm, right=1.50cm, top=2.00cm, bottom=1.80cm]{geometry}
+
+% ===== Multilingual environments ==============================
+% -------------------------
+% Languages
+% -------------------------
+\setmainlanguage{english}					% Main language
+\setotherlanguages{hebrew,arabic,russian}	% Other languages
+
+% -------------------------
+% Fonts
+% -------------------------
+% \setmainfont{Latin Modern Roman}							% Latin script serif
+\setmainfont{ClearSans}               						% Latin script sans
+\newfontfamily\cyrillicfont{Times New Roman}   				% Cyrillic
+\newfontfamily\hebrewfont[Script=Hebrew]{Alef}      		% Hebrew
+\newfontfamily\arabicfont[Script=Arabic]{Noto Naskh Arabic} % Arabic
+
+% --------------------------------------
+% Custom environments for RTL paragraphs
+% --------------------------------------
+% Hebrew paragraph
+\newenvironment{HebrewParagraph}
+{\begin{RTL}\hebrewfont}
+	{\end{RTL}}
+
+% Arabic paragraph
+\newenvironment{ArabicParagraph}
+{\begin{RTL}\arabicfont}
+	{\end{RTL}}
+
+% Cyrillic paragraph (optional)
+\newenvironment{CyrillicParagraph}
+{\cyrillicfont}
+{}
+
+% ===== Inline Multilingual Text ===============================
+%	\texthebrew{שלום עולם}			% Hebrew inline
+%	\textarabic{مرحبا بالعالم}		% Arabic inline
+%	\textrussian{Привіт, світе!}	% Cyrillic inline
+
+% ===== Multilingual Paragraphs ================================
+%\begin{HebrewParagraph}
+%זהו פסקה מלאה בעברית.
+%ניתן להקליד כאן יותר משורה אחת.
+%\end{HebrewParagraph}
+%
+%\begin{ArabicParagraph}
+%هذا فقرة كاملة بالعربية.
+%يمكن كتابة أكثر من سطر هنا.
+%\end{ArabicParagraph}
+%
+%\begin{CyrillicParagraph}
+%	Це повний абзац українською.
+%	Можна писати більше одного рядка.
+%\end{CyrillicParagraph}
+
+% ===== Multilingual Mixed Text ================================
+% Here is mixed text: \texthebrew{שלום}, \textarabic{مرحبا}, and English together.
+
+% USAGE DIRTREE
+%==============
+%\dirtree{%
+	%	.1 Root.
+	%	.2 Level 2 \DTcomment{Level 2 comment}.
+	%	.3 Level 3 \DTcomment{Level 3 comment}.
+	%}
+
+% USAGE TABULARX
+%================
+%\begin{tabularx}{0.95\textwidth}{|l|X|}
+%	\hline
+%	Header 1	& Header 2		\\
+%	\hline
+%	Line 1 Left	& Line 1 Right 	\\
+%	Line 2 Left	& Line 2 Right 	\\
+%	\hline
+%\end{tabularx}
+
+%USAGE ITEMIZE WITH ITEMSEP
+%==========================
+%\begin{itemize}\itemsep-4pt
+%\item First Item
+%\item Second Item
+%\item ...
+%\item Last Item
+%\end{itemize}
+
+% USAGE APPENDICES
+%=================
+%\appendices
+%\section{Important Equations}
+
+% MATRICES
+%=========
+% matrix		no borders
+% pmatrix		()
+% bmatrix		[]
+% vmatrix		||
+% Vmatrix		|| ||
+% BMatrix		{}
+
+% ALIGNMENT
+% =========
+% \begin{equation}\label{key}
+	% 	\begin{aligned}
+		% 		a   &= x_{ij} \\
+		% 		b_j &= y_j 
+		% 	\end{aligned}
+	% \end{equation}
+
+% AUTO COUNTER (the prefix here being "Requirement")
+%===================================================
+\newcounter{ReqCounter}
+\newcommand{\req}{\protect\stepcounter{ReqCounter}\textbf{RQ} \textbf{\theReqCounter.}~}
+
+\input{../commands}
+% -------------------------
+% Document
+% -------------------------
+\author{Stanislav Koncebovski}
+\title{Laplace Transform}
+
+\begin{document}
+	\maketitle
+	
+	\section{Definitions}
+	% \lop{g(t)} \\ \ilop{H(p)}
+	One of very useful tools for the description of the behavior of \ldss is the \lt. Here we render a few general definition of this instrument and point to those of its properties that find application for those purposes. We limit ourselves to a mere enumeration of the facts, with a minimum of evaluation or proof. Readers interested in strict mathematical results are referred to a host of available literature (e.g. \cite{davies_integral_2002}).
+	
+	\lt is defined for functions of time $f(t)$ with the following properties:
+	\begin{itemize}\itemsep-4pt
+	\item $f(t) = 0, t < 0;$
+	\item for $t \rightarrow \inf$, $f(t)$ either decreases or, if it increases, then no faster than some exponential, $f(t) \leq e^{\alpha t}, \alpha > 0.$
+	\end{itemize}
+	Functions of time occurring in \ldss normally fulfill both of these conditions.
+	
+	If these conditions are fulfilled, the Laplace image of $f(t)$ is defined as
+	
+	\begin{equation}\label{eq:lablace basic}
+		F(p) = \int \limits_0^\infty e^{-pt} f(t) dt.
+	\end{equation}
+	
+	The function $F(t)$ is then called the Laplace original of $F(p).$
+	
+	Often the fact that $F(p)$ is the Laplace image of $f(t)$ is represented in operator notation:
+	\begin{equation}
+		F(p) = \lop{f(t)}.
+	\end{equation}
+	
+	The other way round, if we want to state that $f(t)$ is the Laplace original of $F(p)$ we can express it with the following operator notation:
+	\begin{equation}
+		f(t) = \ilop{F(p)}.
+	\end{equation}
+	
+	\section{Some properties of \lt}
+	\paragraph{Linearity\\}
+	\lt is linear, that is the principle of superposition fulfills (obviously, due to the linearity of the operation of integration):
+	\begin{equation}\label{eq:laplace lineariry}
+	 	\begin{aligned}
+	 		\lop{f_1(t) + f_2(t)}  &= \lop{f_1(t)} + \lop{f_2(t)}, \\
+	 		\lop{k \cdot f(t)} &= k \cdot \lop{f(t)}, k = const.
+	 	\end{aligned}
+	\end{equation}
+	
+	\paragraph{\lt of derivative\\}
+	If the \lt for a function is known, \lt for its derivative can be found in a simple expression. Indeed,
+	\[ 
+		\lop{f'(t)} = \int \limits_0^\infty e^{-pt} f'(t) dt.
+	\] 
+	Applying the rule of partial integration ($e^{-pt} = u, ~ f't) dt = dv$), we obtain that 
+	\[ \lop{f'(t)} = e^{-pt} f(t) \rvert_0^\infty + p \int \limits_0^\infty e^{-pt} f(t) dt, \] in other words,
+	
+	\begin{equation}
+		\lop{f'(t)} = p \lop{f(t)} - f(0).
+	\end{equation}
+	
+	If, additionally, $f(0) = 0$ (which is very often if the model is interested in deviations from some initial value - \gw \dd being an example), we have
+	\begin{equation}
+		\lop{f'(t)} = p \cdot \lop{f(t)}.
+	\end{equation}
+	
+	\paragraph{\lt of higher derivatives\\}
+	Analog to how the expression for the \lt of the first derivative was obtained, the same technique can be applied to obtain expressions for the \lt of higher derivatives. For example,
+	\begin{equation}
+		\begin{aligned}
+			\lop{f''(t)} &= p^2 \lop{f(t)} - f'(0) p - f(0), \\
+			\lop{f'''(t)} &= p^3 \lop{f(t)} - f''(0) p^2 - f'(0) p - f(0), \\
+			etc.&~
+		\end{aligned}
+	\end{equation}
+	
+	\paragraph{\lt of integral\\}
+	Let $g(t) = \int \limits_0^t f(\tau) d \tau$ be the integral function of $f(t.)$ The \lt of $g(t)$ can then be expressed in terms of $\lop{f(t)}.$ Indeed, applying the rule of partial integration to the expression
+	
+	\[
+		\int \limits_0^\infty e^{-pt} g(t) dt
+ 	\]
+ 	
+ 	we let $e^{-pt} dt = dv,~ g(t) = u.$ Then $v = -\frac{1}{p} \cdot e^{-pt}, ~ du = \frac{dg}{dt} \cdot dt = f(t) dt,$ and
+ 	
+ 	\[ 
+ 		\lop{g(t)} = -\frac{1}{p} \cdot g(t) \cdot e^{-pt} \rvert_0^\infty + \frac{1}{p} \cdot \int \limits_0^\infty e^{-pt} f(t) dt,
+ 	\]
+ 	
+ 	or
+ 	
+ 	\begin{equation}
+ 		\lop{\int \limits_0^t f(\tau) d \tau} = \frac{1}{p} \cdot \lop{f(t)}.
+ 	\end{equation}
+ 	
+ 	\paragraph{\lt of repeated integral\\}
+ 	Analog to how the expression for the \lt of the integral of a function was obtained, the same technique can be applied to obtain expressions for the \lt of repeated integrals. For example, if $g(t) = \int \limits_0^t f(\tau) d \tau,$
+ 	
+ 	\begin{equation} 
+ 		\lop{\int \limits_0^t g(\sigma) d \sigma} = \frac{1}{p^2} \cdot \lop{f(t).}
+ 	\end{equation}
+ 	
+ 	\paragraph{Limit values\\}
+ 	The values ​​of the original $f(t)$ at $t = 0$ and $t \rightarrow \inf$ an be determined using the image $F(p) = \lop{f(t)}$ as follows:
+	\begin{equation}
+		\begin{aligned}
+			f(0) &= \lim_{p \to \infty} p F(p), \\
+			f(\infty) &= \lim_{p \to 0} p F(p). \\
+		\end{aligned}
+	\end{equation}
+	
+	\paragraph{Time shift\\}
+	If $F(p = \lop{f(t)}),$ then the \lt of the same function shifted by the value $a$
+ 	along the time axis, $f(t - a), $ is given by the following expression:
+ 	\begin{equation}\label{eq: laplace shift}
+ 		\lop{f(t+a)} = e^{-pa} \cdot \lop{f(t).}
+ 	\end{equation}
+ 	To obtain this, it is sufficient to perform a simple substitution of variables in  equation [\ref{eq:lablace basic}]. (Notice at that the values of the shifted function are zero if $t \in [0, a]$!)
+ 	
+ 	
+ 	\section{Images of some basic functions}
+ 	\subsection{Heaviside's unitary step}
+ 	Heaviside's unitary step function is defined as 
+ 	
+ 	\begin{equation}
+ 		H(t) = \left\{\begin{array}{ll} 		% 'll' aligns two columns to the left
+ 			0, & \text{if } t < 0. \\ 			% Use \text{} for text, & to separate
+ 			1, & \text{if } t \ge 0.
+ 			\end{array}
+			\right.
+ 	\end{equation}
+ 	
+ 	Its \lt is 
+ 	\begin{equation}\label{eq:laplace heaviside}
+ 		\lop{H(t)} = \frac{1}{p}.
+ 	\end{equation}
+ 	
+ 	\subsection{Linear function}
+ 	For the linear function
+ 	\[
+ 		f(t) = \left\{\begin{array}{ll}
+ 			0, & \text{if } t < 0. \\
+ 			\alpha t, & \text{if } t \ge 0 ~(\alpha = const)
+ 		\end{array}
+ 		\right.
+ 	\]
+ 	the \lt is 
+ 	\begin{equation}
+ 		\lop{\alpha t} = \frac{\alpha}{p}.
+ 	\end{equation}
+ 	
+ 	\subsection{Exponential function}
+ 	For the exponential function $f(t) = e^{\alpha t}$ the \lt is
+ 	\begin{equation}
+ 		\lop{e^{\alpha t}} = \frac{1}{p - \alpha}.
+ 	\end{equation}
+ 	
+ 	\subsection{Dirac's delta function}
+ 	Dirac's delta function is a so called generalized function that can only be defined as a limit of a series of "normal" functions. Because of the special importance of this function in many applications (it describes, among other properties, locations of infinitely small sources and sinks), it seems to be appropriate to explain it to some more extent.
+ 	
+ 	\begin{figure}[H]
+ 		\centering
+ 		\includegraphics[width=0.5\linewidth]{../figures/part_1/diracs_delta}
+ 		\caption{To the definition of Diracs delta function}
+ 		\label{fig:diracs-delta}
+ 	\end{figure}
+ 	
+ 	There are many possibilities to define Dirac's delta function. The simplest of them is to consider the sequence of step functions like those shown in Figure  \ref{fig:diracs-delta}:
+ 	
+ 	\begin{equation}
+ 		h_\varepsilon(t) = \left\{\begin{array}{ll}
+ 			\frac{1}{\varepsilon}, \text{if } 0 \leq t <= \varepsilon, \\
+ 			0 \mathrm{otherwise}
+ 		\end{array}
+ 		\right.
+ 	\end{equation}
+ 	
+ 	With any finite value of $\varepsilon$ the integral $\int \limits_0^\infty h_\varepsilon(t) dt, $ or the area below the $h_\varepsilon$ line preserves the value of 1.
+ 	
+ 	Dirac's delta function $ \delta(t)$ is regarded as the generalized limit of this sequence of $h_\varepsilon(t)$ with $t \rightarrow 0.$
+ 	
+ 	According to the equations [\ref{eq:laplace heaviside}], [\ref{eq:laplace lineariry}], [\ref{eq: laplace shift}] the \lt of $h_\varepsilon(t)$ at any finite value of $\varepsilon$ is
+ 	\[ 
+ 		\lop{h_\varepsilon(t)} = \frac{1-e^{-p\varepsilon}}{p\varepsilon}.
+ 	\]
+ 	
+ 	With $\varepsilon \rightarrow 0 $ the numerator of the latter equation approaches $p\cdot \varepsilon + o(p \varepsilon),$ therefore $\lim_{\varepsilon \to 0} \lop{h_\varepsilon(t)} = 1,$ in other words,
+ 	\begin{equation}
+ 		\lop{\delta(t) = 1.}
+ 	\end{equation}
+ 	
+	\bibliographystyle{ieeetr}
+	\bibliography{../bibliography/references}
+\end{document}
