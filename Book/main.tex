@@ -1,0 +1,41 @@
+\documentclass[12pt,oneside]{book}
+
+\input{preamble}
+\input{commands}
+
+\begin{document}
+
+\frontmatter
+\input{frontmatter/title}
+\input{frontmatter/preface}
+\input{frontmatter/notation}
+
+\tableofcontents
+
+\chapter*{Notation}
+\addcontentsline{toc}{chapter}{Notation}
+\input{notation_master}
+
+\mainmatter
+
+\part{Foundations. Philosophy and Mathematics}
+\input{chapters/part_1/ch_01}
+\input{chapters/part_1/ch_02}
+\input{chapters/part_1/ch_03}
+
+\part{Geofiltration systems}
+\input{chapters/part_2/ch_04}
+
+\part{Model Zoo}
+\input{chapters/part_3/model_zoo}
+
+\appendix
+\input{chapters/appendix/a_01}
+
+\bibliographystyle{ieee}
+\bibliography{bibliography/references}
+
+\backmatter
+\printindex
+
+\end{document}

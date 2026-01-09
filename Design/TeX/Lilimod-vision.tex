@@ -1,0 +1,165 @@
+% !TeX program = xelatex
+
+% Chat GPT's universal template for Latin, Cyrillic, Arabic, and Hebrew environments using XeLaTeX.
+
+\documentclass[12pt]{article}
+% ===== Packages ===============================================
+\usepackage{fontspec}     % For OpenType/Unicode fonts
+\usepackage{polyglossia}  % For multilingual support
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{xspace}
+\usepackage{tipa}
+\usepackage{dirtree}
+\usepackage{url}
+\usepackage{color}
+\usepackage[toc,page]{appendix}
+\usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref}
+\usepackage[left=2.30cm, right=1.50cm, top=2.00cm, bottom=1.80cm]{geometry}
+
+% ===== Multilingual environments ==============================
+% -------------------------
+% Languages
+% -------------------------
+\setmainlanguage{english}					% Main language
+\setotherlanguages{hebrew,arabic,russian}	% Other languages
+
+% -------------------------
+% Fonts
+% -------------------------
+% \setmainfont{Latin Modern Roman}							% Latin script serif
+\setmainfont{ClearSans}               						% Latin script sans
+\newfontfamily\cyrillicfont{Times New Roman}   				% Cyrillic
+\newfontfamily\hebrewfont[Script=Hebrew]{Alef}      		% Hebrew
+\newfontfamily\arabicfont[Script=Arabic]{Noto Naskh Arabic} % Arabic
+
+% --------------------------------------
+% Custom environments for RTL paragraphs
+% --------------------------------------
+% Hebrew paragraph
+\newenvironment{HebrewParagraph}
+{\begin{RTL}\hebrewfont}
+	{\end{RTL}}
+
+% Arabic paragraph
+\newenvironment{ArabicParagraph}
+{\begin{RTL}\arabicfont}
+	{\end{RTL}}
+
+% Cyrillic paragraph (optional)
+\newenvironment{CyrillicParagraph}
+{\cyrillicfont}
+{}
+
+% ===== Inline Multilingual Text ===============================
+%	\texthebrew{שלום עולם}			% Hebrew inline
+%	\textarabic{مرحبا بالعالم}		% Arabic inline
+%	\textrussian{Привіт, світе!}	% Cyrillic inline
+
+% ===== Multilingual Paragraphs ================================
+%\begin{HebrewParagraph}
+%זהו פסקה מלאה בעברית.
+%ניתן להקליד כאן יותר משורה אחת.
+%\end{HebrewParagraph}
+%
+%\begin{ArabicParagraph}
+%هذا فقرة كاملة بالعربية.
+%يمكن كتابة أكثر من سطر هنا.
+%\end{ArabicParagraph}
+%
+%\begin{CyrillicParagraph}
+%	Це повний абзац українською.
+%	Можна писати більше одного рядка.
+%\end{CyrillicParagraph}
+
+% ===== Multilingual Mixed Text ================================
+% Here is mixed text: \texthebrew{שלום}, \textarabic{مرحبا}, and English together.
+
+% USAGE DIRTREE
+%==============
+%\dirtree{%
+	%	.1 Root.
+	%	.2 Level 2 \DTcomment{Level 2 comment}.
+	%	.3 Level 3 \DTcomment{Level 3 comment}.
+	%}
+
+% USAGE TABULARX
+%================
+%\begin{tabularx}{0.95\textwidth}{|l|X|}
+%	\hline
+%	Header 1	& Header 2		\\
+%	\hline
+%	Line 1 Left	& Line 1 Right 	\\
+%	Line 2 Left	& Line 2 Right 	\\
+%	\hline
+%\end{tabularx}
+
+%USAGE ITEMIZE WITH ITEMSEP
+%==========================
+%\begin{itemize}\itemsep-4pt
+%\item First Item
+%\item Second Item
+%\item ...
+%\item Last Item
+%\end{itemize}
+
+% USAGE APPENDICES
+%=================
+%\appendices
+%\section{Important Equations}
+
+% MATRICES
+%=========
+% matrix		no borders
+% pmatrix		()
+% bmatrix		[]
+% vmatrix		||
+% Vmatrix		|| ||
+% BMatrix		{}
+
+% ALIGNMENT
+% =========
+% \begin{equation}\label{key}
+	% 	\begin{aligned}
+		% 		a   &= x_{ij} \\
+		% 		b_j &= y_j 
+		% 	\end{aligned}
+	% \end{equation}
+
+% AUTO COUNTER (the prefix here being "Requirement")
+%===================================================
+\newcounter{ReqCounter}
+\newcommand{\req}{\protect\stepcounter{ReqCounter}\textbf{RQ} \textbf{\theReqCounter.}~}
+
+\include{lilimod-macros}
+
+% -------------------------
+% Document
+% -------------------------
+\author{Stanislav Koncebovski}
+\title{Project Lilimod}
+
+\begin{document}
+	\maketitle
+	
+	\section{Project Name}
+	The name of the project has been hatched as a recursive acronym of \textbf{L}ilimod \textbf{I}s \textbf{LI}near \textbf{MOD}eling.
+	
+	\section{What it is about}
+	\Li can be conceived as a treatise on the linear models of \gw dynamics (and similar processes, e.g. heat transfer and diffusion).
+	
+	\section{Contents}
+	\Li consists of two conceptual elements: a text, or a book, and a software package containing program code.
+	
+	The book describes the phenomena pertaining to \gw dynamics, its formalization in terms of linear models, and the mathematical apparatus used. 
+	
+	The software package contains code that, on the one hand, illustrates the equations dealt with in the book, on the other hand, it can be used to directly perform desired calculations.
+	
+	\section{Software package}
+	The software package is going to be created as maximally OS-blind. At the time of writing, the environment of choice is Python (V.3.12+).
+	
+\end{document}

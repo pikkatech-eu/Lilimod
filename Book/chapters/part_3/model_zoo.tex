@@ -1,0 +1,95 @@
+% !TeX root = ../../main.tex
+% !TeX spellcheck = en_US
+% !TeX encoding = UTF-8
+
+
+\chapter{Model Zoo}
+
+	\section{Homogeneous aquifers}
+	Table \ref{tab:model-zoo homogeneous schemes} contains a few schemes of homogeneous aquifers. For simplicity, the schemes were assigned numerical and literal codes following the following pattern:
+	
+	\begin{tabularx}{0.95\textwidth}{|X|X|X|}
+		\hline
+		Aquifer Geometry	& Numerical Code & Literal Code		\\
+		\hline
+		Infinite		& I & 0	\\
+		Semi-Infinite	& S	& 1	\\
+		Quadrant		& Q	& 2	\\
+		Band			& B	& 3	\\
+		Half-band		& H	& 4	\\
+		Rectangle		& R	& 5	\\
+		Wedge			& W	& 6	\\
+		Circle			& C	& 7	\\
+		\hline
+	\end{tabularx}
+	
+	In the literal codes of the aquifers the first letter is the literal code pertaining to the geometry, followed by a combination of \textit{r} and \textit{i} letters, where \textit{r} corresponds to a recharge boundary, \textit{i} to an impermeable boundary. Thus, \textit{Qri} means "Quadrant aquifer with a recharge boundary and an impermeable one".
+	
+	\pagebreak
+\setlength{\LTcapwidth}{\textwidth}
+\begin{longtable}{|c|l|l|p{0.5\textwidth}|}
+\caption{Schemes of homogeneous aquifers in Model Zoo.\\
+Blue lines: recharge boundaries, red lines: impermeable boundaries.} 
+\label{tab:model-zoo homogeneous schemes} \\
+	
+	\hline
+	Scheme	&  Number code	& Literal code & Description \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/I} & 0 & I & Infinite aquifer \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Sr} & 1.1  & Sr & Semi-infinite aquifer with recharge boundary \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Si} & 1.2 & Si  &  Semi-infinite aquifer with impermeable boundary \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Qrr} & 2.1 & Qrr & Quadrant aquifer with recharge boundaries \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Qir} & 2.2 & Qir & Quadrant aquifer with a recharge and an impermeable boundary \\
+	\hline
+	
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Qri} & 2.3 & Qri & Quadrant aquifer with an impermeable and a recharge boundary \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Qii} & 2.4 & Qii & Quadrant aquifer with impermeable boundaries \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Brr} & 3.1 & Brr & Band aquifer with recharge boundaries \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Bri} & 3.2  & Bri & Band aquifer with a recharge and and impermeable boundary \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Bii} & 3.3 & Bii  & Band aquifer with impermeable boundaries \\
+	\hline
+	
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Hrrr} & 4.1 & Hrrr &  Half-band aquifer with recharge boundaries \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Hirr} & 4.2 & Hirr & Half-band aquifer with a recharge and two impermeable boundaries \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Hiir} & 4.3 & Hiir & Half-band aquifer with two impermeable and a recharge boundary \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Hiii} & 4.4 & Hiii & Half-band aquifer with three impermeable boundaries \\
+	\hline
+	
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Riiii} & 5.1 & Riiii &  Rectangular aquifer with all impermeable boundaries \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Riiir} & 5.2 & Riiir & Rectangular aquifer with three impermeable and a recharge boundary \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Riirr} & 5.3 & Riirr & Rectangular aquifer with two impermeable and two recharge boundaries \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Riiir} & 5.4 & Riiir & Rectangular aquifer with three impermeable and a recharge boundary  \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Rriri} & 5.5 & Rriri & Rectangular aquifer with two impermeable and two recharge boundaries \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Rrrrr} & 5.6 & Rrrrr & Rectangular aquifer with all recharge boundaries \\
+	\hline
+	
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Wrr} & 6.1 & Wrr &  Wedge aquifer with two recharge boundaries \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Wir} & 6.2 & Wir & Wedge aquifer with an impermeable and a recharge boundary \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Wii} & 6.3 & Wii & Wedge aquifer with two impermeable boundaries \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Cr} & 7.1 & Cr & Circular aquifer with recharge boundary \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Ci} & 7.2 & Ci & Circular aquifer with impermeable boundary \\
+	\hline
+	\includegraphics[width=0.15\linewidth]{figures/part_3/Cri} & 7.3 & Cri & Circular aquifer with recharge  and impermeable boundary \\
+	\hline
+	
+\end{longtable}
