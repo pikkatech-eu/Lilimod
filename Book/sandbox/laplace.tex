@@ -197,7 +197,7 @@
 	\end{equation}
 	
 	If, additionally, $f(0) = 0$ (which is very often if the model is interested in deviations from some initial value - \gw \dd being an example), we have
-	\begin{equation}
+	\begin{equation}\label{eq: laplace of derivative}
 		\lop{f'(t)} = p \cdot \lop{f(t)}.
 	\end{equation}
 	
@@ -288,7 +288,7 @@
  	
  	\subsection{Exponential function}
  	For the exponential function $f(t) = e^{\alpha t}$ the \lt is
- 	\begin{equation}
+ 	\begin{equation}\label{eq: lt exponent}
  		\lop{e^{\alpha t}} = \frac{1}{p - \alpha}.
  	\end{equation}
  	
@@ -325,6 +325,50 @@
  	\begin{equation}
  		\lop{\delta(t) = 1.}
  	\end{equation}
+ 	
+ 	\section{\lt and \odes}
+ 	\paragraph{Introductory example\\}
+ 	A number of simple models from different domains of science and technology are described by a first-order \ode with constant coefficient. Classical examples are charging/discharging of a capacitor through a resistor with an applied external voltage; population dynamics under external influx; Brownian motion; chemical kinetics; inertial elements in control systems; discharge of springs and many others.
+ 	
+ 	\begin{figure}[H]
+ 		\centering
+ 		\includegraphics[width=0.25\linewidth]{../figures/part_1/RC-circuit}
+ 		\caption{Simple electrical circuit with a capacitor, resistor, and an external voltage source}
+ 		\label{fig:rc-circuit}
+ 	\end{figure}
+ 	
+ 	Figure \ref{fig:rc-circuit} shows a simple electrical circuit with a capacitor (C), resistor (R) and an external voltage source with a temporal dependency of the voltage value $E(t).$
+ 	
+ 	The temporal dependency of the voltage at the capacitor $V(t)$ is described by the following \ode \cite{Johnson_2014}:
+ 	\begin{equation}\label{eq:ode rc circuit}
+ 		\frac{dV}{dt} + \frac{1}{RC} V = \frac{1}{RC} \cdot E(t)
+ 	\end{equation}
+ 	
+ 	Let $\hat{V}(p)$ be the \lt of the temporal function $V(t)$: $\hat{V}(p) = \lop{V(t)}.$ According to [\ref{eq: laplace of derivative}] $\lop{\frac{dV}{dt}} = p \hat{V}(p) - V_0,$ where $V_0$ is the value of the capacitor voltage at the initial moment of time $t=0.$ The time dependency of the applied external voltage $E(t)$ is supposed to be known, as well as its \lt $\hat E(p).$ Applying \lt to both parts of [\ref{eq:ode rc circuit}], we obtain:
+ 	
+ 	\begin{equation}\label{eq:rc circuit lt}
+ 		p \hat{V}(p) - V_0 = \frac{1}{RC} \hat{V}(p) = \frac{1}{RC} \hat E(p).
+ 	\end{equation}
+ 	
+ 	Regrouping in [\ref{eq:rc circuit lt}] and setting $T = RC,$ we obtain the solution in terms of \lt:
+ 	\begin{equation}\label{eq:rc circuit solution in lt}
+ 		\hat{V}(p) = \frac{\hat E(p) + T V_0}{1 + Tp}.
+ 	\end{equation}
+ 	
+ 	Equation [\ref{eq:rc circuit solution in lt}] represents tie general solution of the \ode \ref{eq:ode rc circuit} in terms of \lt. Instead of a differential equation we have an algebraic equation now, and, if we are in a position to step down from a Laplace image to its temporal original, we can find the solution of the \ode for all cases. Finding  \tmp originals of arbitrary Laplace images will be considered in following sections; now let us dwell upon a few simple cases.
+ 	
+ 	\paragraph{Discharge of the capacitor with no external voltage\\}
+ 	In Equation [\ref{eq:rc circuit solution in lt}] let us set $\hat E(p) = 0$ (no external voltage.) Then
+ 	\begin{equation}
+ 		\hat{V}(p) = T V_0 \cdot \frac{1}{1 + Tp} = V_0 \cdot \frac{1}{1 + \frac{1}{T}}.
+ 	\end{equation}
+ 	
+ 	Comparing the right fraction of this expression with [\ref{eq: lt exponent}] we can easily conclude that the \tmp function of the capacitor voltage in this case is:
+ 	\begin{equation}
+ 		V(t) = V_0 \cdot e^{-t / T}.
+ 	\end{equation}
+ 	
+ 	
  	
 	\bibliographystyle{ieeetr}
 	\bibliography{../bibliography/references}
