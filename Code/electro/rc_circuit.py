@@ -1,6 +1,6 @@
 import math
 import numpy as np
-
+from liliutils.plotter import Plotter
 
 DEFAULT_RESISTANCE  = 10000     # Ohm
 DEFAULT_CAPACITY    = 1e-4      # Far
@@ -37,9 +37,49 @@ class RCCircuit:
         :return: None
         """
         values = []
-        for t in np.arange(0, t_fin. dt):
+        for t in np.arange(0, t_fin + dt, dt):
             V = initial_voltage * math.exp(-t / self.T)
             values.append([t, V])
 
+        plotter = Plotter()
+
+        plotter.plot(values, x_max=t_fin, y_max=initial_voltage,
+                     step_x_major=1.0,
+                     step_x_minor=0.1,
+                     step_y_major=initial_voltage / 10,
+                     step_y_minor=initial_voltage / 20,
+                     title="Steady discharge",
+                     label_x="time, s",
+                     label_y="voltage, V",
+                     size=(8, 6))
+
+    def steady_recharge(self, external_voltage: float, t_fin: float, dt: float) -> None:
+        values = []
+        for t in np.arange(0, t_fin + dt, dt):
+            V = external_voltage * (1 - math.exp(-t / self.T))
+            values.append([t, V])
+
+        plotter = Plotter()
+
+        plotter.plot(values, x_max=t_fin, y_max=external_voltage,
+                     step_x_major=1.0,
+                     step_x_minor=0.1,
+                     step_y_major=external_voltage / 10,
+                     step_y_minor=external_voltage / 20,
+                     title="Steady recharge",
+                     label_x="time, s",
+                     label_y="voltage, V",
+                     size=(8, 6))
+
+if __name__ == '__main__':
+    print("hello")
+
+    circuit = RCCircuit()
+
+    V0  = 100
+    t_fin = 4.0
+    dt = 0.1
+
+    circuit.steady_discharge(V0, t_fin, dt)
 
 

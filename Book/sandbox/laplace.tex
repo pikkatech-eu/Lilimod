@@ -226,7 +226,7 @@
  	
  	or
  	
- 	\begin{equation}
+ 	\begin{equation}\label{eq: lt of integral}
  		\lop{\int \limits_0^t f(\tau) d \tau} = \frac{1}{p} \cdot \lop{f(t)}.
  	\end{equation}
  	
@@ -364,11 +364,41 @@
  	\end{equation}
  	
  	Comparing the right fraction of this expression with [\ref{eq: lt exponent}] we can easily conclude that the \tmp function of the capacitor voltage in this case is:
- 	\begin{equation}
+ 	\begin{equation}\label{eq:rc-steady discharge example}
  		V(t) = V_0 \cdot e^{-t / T}.
  	\end{equation}
  	
+ 	Figure \ref*{fig:rcsteadydischarge} shows solution (\ref{eq:rc-steady discharge example}) computed using the \texttt{steady\_discharge} routine of the \texttt{RCCircuit} class (lilimod/electro/rc-circuit.py).
  	
+ 	\begin{figure}[H]
+ 		\centering
+ 		\includegraphics[width=0.75\linewidth]{../figures/part_1/rc_steady_discharge}
+ 		\caption{Time dependency of the capacitor voltage in the example ($V_0 = 100V, R=10000 \Omega, C = 10^{-4} F$)}
+ 		\label{fig:rcsteadydischarge}
+ 	\end{figure}
+ 	
+ 	\paragraph{Capacitor recharge\\}
+ 	Let us now consider the case when the capacitor is empty at $t=0$ ($V_0 = 0$) and the external voltage starts at $t=0$ and is constant furthermore: $E(t) = E_0 \cdot H(t)$.
+ 	
+ 	From (\ref{eq:rc circuit solution in lt}) we will have for this case:
+ 	\begin{equation}\label{eq:capacitor recharge lt}
+ 		\hat{V}(p) = \frac{E_0}{p} \cdot \frac{1}{1 + Tp} .
+ 	\end{equation}
+ 	We have already obtained that $\ilop{\frac{1}{1 + \frac{1}{T}}} = e^{-t/T}.$ The $\frac{1}{p}$ factor in (\ref{eq:capacitor recharge lt}) means that to obtain the Laplace original for $V(t)$ we first need to integrate this function (\ref{eq: lt of integral}):
+ 	\[ 
+ 		\ilop{\frac{1}{p} \cdot \frac{1}{1 + Tp}} = \int \limits_0^t e^{-\tau / T} d\tau = T (1 - e^{-t/T}),
+ 	\]
+ 	so that the time dependency of capacitor voltage will be
+ 	\begin{equation}
+ 		V(t) = E_0 \cdot (1 - e^{-t/T}).
+ 	\end{equation}
+ 	
+ 	\begin{figure}[H]
+ 		\centering
+ 		\includegraphics[width=0.75\linewidth]{../figures/part_1/rc_steady_recharge}
+ 		\caption{xxxx}
+ 		\label{fig:rcsteadyrecharge}
+ 	\end{figure}
  	
 	\bibliographystyle{ieeetr}
 	\bibliography{../bibliography/references}
