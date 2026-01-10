@@ -1,0 +1,44 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{longtable}
+
+% Column types
+\newcolumntype{L}{>{\raggedright\arraybackslash}p{0.72\textwidth}}
+%\newcolumntype{R}{>{\raggedright\arraybackslash}p{0.52\textwidth}}
+\newcolumntype{N}{>{\bfseries\raggedright\arraybackslash}p{0.10\textwidth}}
+
+\renewcommand{\arraystretch}{3.0}
+
+% Useful macros
+\newcommand{\E}{\mathrm{e}}
+\newcommand{\erfc}{\mathrm{erfc}}
+\newcommand{\cerfc}{\mathrm{cerfc}}
+\newcommand{\serfc}{\mathrm{serfc}}
+\newcommand{\ds}{\displaystyle}
+
+\begin{document}
+	
+	\section*{Special Functions}
+	
+	\begin{longtable}{@{} N L @{}}
+		\caption{Special Functions}\label{tab:laplace} \\[1.0ex]
+		
+		%~ & $F(p)$ & ${f(t)}$ \\[0.6ex]
+		\hline \\[-1.0ex]
+		
+		\endfirsthead
+		
+		\endhead
+
+% ---- Entries ----
+
+1 & $\ds \cerfc(u, \alpha) = \frac{1}{2} \left[ \E^{-\alpha} \erfc \left( u - \frac{\alpha}{2 u} \right)  + \E^{\alpha} \erfc \left( u + \frac{\alpha}{2 u} \right) \right]$ \\[1.2ex]		
+
+2 & $\ds \serfc(u, \alpha) = \frac{1}{2} \left[ \E^{-\alpha} \erfc \left( u - \frac{\alpha}{2 u} \right)  - \E^{\alpha} \erfc \left( u + \frac{\alpha}{2 u} \right) \right]$ \\[1.2ex]
+
+	\end{longtable}
+
+\end{document}	
+

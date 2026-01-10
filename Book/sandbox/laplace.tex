@@ -446,39 +446,38 @@
 	whereas the Laplace image of the constant external force was $\hat E(p) = E_0 / p.$
 	
 	\section{Inversion of \lt}
-	Solution of \odes (and \pdes, as we will see later) is one of the main applications of \lt. Whereas it is relatively simple to get at a solution in terms of \lt, the next step is to convert them into temporal dependencies. This step is called \lti. We have already learned about a few elementary correspondences between \lt and \lti: (\ref{eq:laplace heaviside}) for the Heaviside function, (\ref{eq: lt linear}) for the linear function, (\ref{eq: lt exponent}) for the exponential function, and (\ref{eq:lt delta}) for Dirac's delta function. Table (\ref{tab:short laplace transforms}) contains a few more simple cases. Table (...) in Appendix contains more cases arises in concrete problems in \gf and similar contexts. There exists, besides, ample references covering still other cases. Classical tables of \lti are contained in \cite{Bateman_1954}, but there are also a few more modern sources.
+	Solution of \odes (and \pdes, as we will see later) is one of the main applications of \lt. Whereas it is relatively simple to get at a solution in terms of \lt, the next step is to convert them into temporal dependencies. This step is called \lti. We have already learned about a few elementary correspondences between \lt and \lti: (\ref{eq:laplace heaviside}) for the Heaviside function, (\ref{eq: lt linear}) for the linear function, (\ref{eq: lt exponent}) for the exponential function, and (\ref{eq:lt delta}) for Dirac's delta function. 
 	
-	\begin{table}[H] \label{tab:short laplace transforms}
-		\caption{Short table of inverse Laplace transforms}
-		\setlength{\LTcapwidth}{\textwidth}
-		\begin{longtable}{|r|p{0.3\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}|}
-			\hline
-			No. &	Function			& Image		& Original 	\\
-			\hline
-			1	&	Dirac's Delta 		& 1					& $\delta(t)$ 		\\
-			2	&	Heaviside's step	& $p^{-1}$		& $H(t)$ 			\\
-			3	&	linear function		& $p^{-2}$	& $t$				\\
-			4	&	n-th power (integer $n$)	& $n! \cdot p^{-(n + 1)}$	&	$t^n$	\\
-			5	&	q-th power (real $q$)	& $\Gamma(q+1) \cdot p^{-(q + 1)} $	& $t^q$ \\
-			6	&	exponent	& $(p - a)^{-1}$	& $\exp(at)$	\\
-			7	&	sine	& $\omega \cdot (p^2 + \omega^2)^{-1}$	& $\sin \omega t$ \\
-			8	&	cosine	& $p \cdot (p^2 + \omega^2)^{-1}$	& $\cos \omega t$ \\
-			9	&	hyperbolic sine	& $\alpha \cdot (p^2 - \alpha^2)^{-1}$	& $\sinh \alpha t$ \\
-			10	&	hyperbolic cosine	& $p \cdot (p^2 - \alpha^2)^{-1}$	& $\cosh \alpha t$ \\
-			11	&	logarithm	& $-p^{-1} \cdot (\log p + \gamma)$	& $\log t$ \\
-			\hline
-		\end{longtable}
-	\end{table}
-	In Table \ref{tab:short laplace transforms} $\Gamma(z)$ is the gamma function, $\gamma$ the Euler–Mascheroni constant.
+	%Table (\ref{tab:short laplace transforms}) contains a few more simple cases. 
+	Table (...) in Appendix contains more cases arises in concrete problems in \gf and similar contexts. There exist, besides, numerous collections of comprehensive inversion tables. Classical sources are, for example, \cite{Bateman_1954}, \cite{Abramowitz1964}, and many others..
+	
+%	\begin{table}[H] \label{tab:short laplace transforms}
+%		\caption{Short table of inverse Laplace transforms}
+%		\setlength{\LTcapwidth}{\textwidth}
+%		\begin{longtable}{|r|p{0.3\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}|}
+%			\hline
+%			No. &	Function			& Image		& Original 	\\
+%			\hline
+%			1	&	Dirac's Delta 		& 1					& $\delta(t)$ 		\\
+%			2	&	Heaviside's step	& $p^{-1}$		& $H(t)$ 			\\
+%			3	&	linear function		& $p^{-2}$	& $t$				\\
+%			4	&	n-th power (integer $n$)	& $n! \cdot p^{-(n + 1)}$	&	$t^n$	\\
+%			5	&	q-th power (real $q$)	& $\Gamma(q+1) \cdot p^{-(q + 1)} $	& $t^q$ \\
+%			6	&	exponent	& $(p - a)^{-1}$	& $\exp(at)$	\\
+%			7	&	sine	& $\omega \cdot (p^2 + \omega^2)^{-1}$	& $\sin \omega t$ \\
+%			8	&	cosine	& $p \cdot (p^2 + \omega^2)^{-1}$	& $\cos \omega t$ \\
+%			9	&	hyperbolic sine	& $\alpha \cdot (p^2 - \alpha^2)^{-1}$	& $\sinh \alpha t$ \\
+%			10	&	hyperbolic cosine	& $p \cdot (p^2 - \alpha^2)^{-1}$	& $\cosh \alpha t$ \\
+%			11	&	logarithm	& $-p^{-1} \cdot (\log p + \gamma)$	& $\log t$ \\
+%			\hline
+%		\end{longtable}
+%	\end{table}
+%	In Table \ref{tab:short laplace transforms} $\Gamma(z)$ is the gamma function, $\gamma$ the Euler–Mascheroni constant.
 	
 	\newpage
 	
 	
-	\begin{appendices}
-	\appendix 
-	\section{Extended table of inverted Laplace transform}
-	\lipsum[1]
-	\end{appendices}
+
 	\newpage
 	
 	\bibliographystyle{ieeetr}
