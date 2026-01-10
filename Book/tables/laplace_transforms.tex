@@ -1,0 +1,64 @@
+% ChatGPT: Rule of thumb for your table
+%=====================================
+% With \arraystretch = 2.0, I recommend:
+% Use case	Suggested skip
+% Normal row	\\[1.0ex]
+% Complicated formula	\\[1.4ex]
+% Section break	\\[2.0ex]
+% Feel free to vary it — A&S did.
+% If you ever want to remove it
+% You can always simplify to:
+%\\
+
+%and rely only on \arraystretch.
+%But what you have now is typographically excellent.
+
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{longtable}
+
+% Column types
+\newcolumntype{L}{>{\raggedright\arraybackslash}p{0.42\textwidth}}
+\newcolumntype{R}{>{\raggedright\arraybackslash}p{0.52\textwidth}}
+
+% A&S-like row spacing
+\renewcommand{\arraystretch}{2.0}
+
+% Useful macros
+\newcommand{\E}{\mathrm{e}}
+\newcommand{\ds}{\displaystyle}
+
+\begin{document}
+	
+	\section*{Laplace Transforms}
+	
+	\begin{longtable}{@{}L R@{}}
+		\caption{Laplace Transforms}\label{tab:laplace} \\[1.0ex]
+		
+		$F(p)$	&	$f(t)$
+		\\[0.4ex]
+		\hline
+		\\[-3.5ex]
+		
+		\endfirsthead
+		
+%		$f2(t)$
+%		&
+%		$\Lap\{f(t)\}(s)$
+%		\\[0.6ex]
+%		\hline
+%		\\[-1.0ex]
+		
+		\endhead
+		
+		% ---- Entries ----
+		
+		$\ds \frac{n!}{s^{n+1}}$		&	$\displaystyle t^n$			\\[1.2ex]
+		$\ds \frac{1}{s+a}$				&	$\displaystyle \E^{-a t}$	\\[1.2ex]
+		$\ds -\frac{\gamma + \ln s}{s}$	&	$\displaystyle \ln t$		\\[1.2ex]
+		
+	\end{longtable}
+	
+\end{document}
