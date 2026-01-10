@@ -1,0 +1,47 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{longtable}
+
+% Column types
+\newcolumntype{L}{>{\raggedright\arraybackslash}p{0.42\textwidth}}
+\newcolumntype{R}{>{\raggedright\arraybackslash}p{0.52\textwidth}}
+\newcolumntype{N}{>{\bfseries\raggedright\arraybackslash}p{0.10\textwidth}}
+
+\renewcommand{\arraystretch}{3.0}
+
+% Useful macros
+\newcommand{\E}{\mathrm{e}}
+\newcommand{\erfc}{\mathrm{erfc}}
+\newcommand{\cerfc}{\mathrm{cerfc}}
+\newcommand{\serfc}{\mathrm{serfc}}
+\newcommand{\ds}{\displaystyle}
+
+\begin{document}
+	
+	\section*{Additional Laplace Transforms}
+	
+	\begin{longtable}{@{} N L R @{}}
+		\caption{Additional Laplace Transforms}\label{tab:laplace} \\[1.0ex]
+		
+		~ & $F(p)$ & ${f(t)}$ \\[0.6ex]
+		\hline \\[-1.0ex]
+		
+		\endfirsthead
+		
+		\endhead
+
+% ---- Entries ----
+
+1 & $\ds \frac{1}{p + \gamma} \cdot \frac{\omega}{p^2 + \omega^2}$ & $\ds \frac{1}{\omega^2 + \gamma^2} \cdot \left( \omega \E^{-\gamma t} - \omega \cos \omega t + \gamma \sin \omega t \right)$ \\[1.2ex]		
+
+2 & $\ds \frac{\E^{-\sqrt{\alpha(p + \beta)}}}{p \sqrt{\alpha(p + \beta)}}$ & $\ds \frac{1}{\sqrt{\beta}} \serfc\left(\frac{\sqrt{\alpha}}{2 \sqrt{t}}, \sqrt{\alpha \beta} \right)$  \\[1.2ex]
+
+3 & $\ds \frac{1}{p^{1 + n/2}} \E^{-k \sqrt{p}}$	& $\ds (4t)^{n/2} \cdot \mathrm{i^nerfc} \frac{k}{2 \sqrt{t}}$  \\[1.2ex]
+
+4 & $\ds \frac{\E^{-u \sqrt{\frac{p}{a} + g^2}}}{p \sqrt{\frac{p}{a} + g^2}}$ & $\ds \frac{1}{g^2} \left[ \cerfc \left( \frac{u}{2 \sqrt{at}}, gu \right) - \E^{-a g^2 t} \erfc \frac{u}{2 \sqrt{at}} \right] $  \\
+	\end{longtable}
+
+\end{document}	
+
