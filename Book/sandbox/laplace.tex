@@ -20,7 +20,7 @@
 \usepackage[toc,page]{appendix}
 \usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref}
 \usepackage[left=2.30cm, right=1.50cm, top=2.00cm, bottom=1.80cm]{geometry}
-
+ \usepackage{enumitem}
 \usepackage{lipsum}
 \usepackage[toc,page]{appendix}
 
@@ -448,35 +448,44 @@
 	\section{Inversion of \lt}
 	Solution of \odes (and \pdes, as we will see later) is one of the main applications of \lt. Whereas it is relatively simple to get at a solution in terms of \lt, the next step is to convert them into temporal dependencies. This step is called \lti. We have already learned about a few elementary correspondences between \lt and \lti: (\ref{eq:laplace heaviside}) for the Heaviside function, (\ref{eq: lt linear}) for the linear function, (\ref{eq: lt exponent}) for the exponential function, and (\ref{eq:lt delta}) for Dirac's delta function. 
 	
-	%Table (\ref{tab:short laplace transforms}) contains a few more simple cases. 
 	Table (...) in Appendix contains more cases arises in concrete problems in \gf and similar contexts. There exist, besides, numerous collections of comprehensive inversion tables. Classical sources are, for example, \cite{Bateman_1954}, \cite{Abramowitz1964}, and many others..
 	
-%	\begin{table}[H] \label{tab:short laplace transforms}
-%		\caption{Short table of inverse Laplace transforms}
-%		\setlength{\LTcapwidth}{\textwidth}
-%		\begin{longtable}{|r|p{0.3\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}|}
-%			\hline
-%			No. &	Function			& Image		& Original 	\\
-%			\hline
-%			1	&	Dirac's Delta 		& 1					& $\delta(t)$ 		\\
-%			2	&	Heaviside's step	& $p^{-1}$		& $H(t)$ 			\\
-%			3	&	linear function		& $p^{-2}$	& $t$				\\
-%			4	&	n-th power (integer $n$)	& $n! \cdot p^{-(n + 1)}$	&	$t^n$	\\
-%			5	&	q-th power (real $q$)	& $\Gamma(q+1) \cdot p^{-(q + 1)} $	& $t^q$ \\
-%			6	&	exponent	& $(p - a)^{-1}$	& $\exp(at)$	\\
-%			7	&	sine	& $\omega \cdot (p^2 + \omega^2)^{-1}$	& $\sin \omega t$ \\
-%			8	&	cosine	& $p \cdot (p^2 + \omega^2)^{-1}$	& $\cos \omega t$ \\
-%			9	&	hyperbolic sine	& $\alpha \cdot (p^2 - \alpha^2)^{-1}$	& $\sinh \alpha t$ \\
-%			10	&	hyperbolic cosine	& $p \cdot (p^2 - \alpha^2)^{-1}$	& $\cosh \alpha t$ \\
-%			11	&	logarithm	& $-p^{-1} \cdot (\log p + \gamma)$	& $\log t$ \\
-%			\hline
-%		\end{longtable}
-%	\end{table}
-%	In Table \ref{tab:short laplace transforms} $\Gamma(z)$ is the gamma function, $\gamma$ the Euler–Mascheroni constant.
+
+	\section{Numerical Inversion of \lt}
+		Despite the fact that the collection of \lt and its inversion is very ample, it is not always possible to find one in existing sources, especially by complicated or exotic \tmp dependencies of external forces. Fortunately, there also exists methods to find the numerical values of a Laplace original if the image is known. This class of methods is known as the numerical inversion of \lt.
+		
+		\subsection{Overview}
+		A great number of methods for the numerical inversion of \lt has been developed in the last decades. The interested reader can find an overview of existing methods, among other publications, in \cite{davies_martin_1979}, \cite{cohen_numerical_2007}, \cite{kuhlman_2013}, \cite{piessens_1975}.
+		
+		According to the author's opinion, however, two methods stand out with respect of practical applications: the method of Harald Stehfest \cite{stehfest_1970} and the method of Peter den Iseger \cite{iseger_2006}. In the following sections we will dwell upon these two methods, and on one further historical method of Lev Gokhberg \cite{gokhberg_1982} included rather for private considerations.
+		
+		\subsection{Method of Stehfest}
+		
+		The method of Stehfest uses only the values of \lti om the real axis. This makes it a practical tool, since calculation of the image function with complex arguments causes sometimes greater difficulties. The method is based on an integration formula given by D.P. Gaver \cite{gaver_1966}:
 	
-	\newpage
-	
-	
+		\begin{equation}\label{eq:stehfest}
+			f(t) \approx \frac{\log 2}{t} \cdot \sum \limits_{i=1}^N V_i F\left( \frac{\log 2}{t} \cdot i \right),
+		\end{equation}
+		where
+		
+		\begin{description}[labelwidth=4em,leftmargin=!,itemsep=-4pt]
+			\item[$f(t)$] the approximate value of the original at time value $t$,
+			\item[$F(p)$] the Laplace image function,
+			\item[$V_i$] the coefficients of integration in Gaver's equation,
+			\item[$N$] the order of the integration formula.
+		\end{description}
+		
+		The expression for the coefficients $V_i$ is as follows:
+		\begin{equation}\label{eq: gaver coefficients}
+			V_i = (-1)^{i + N/2} \cdot \sum \limits_{k = \left[ \frac{i + 1}{2} \right]}^{\min(i, N/2)} \frac{k^{N/2 + 1} (2k)!}{(N/2 - k)! k! (k-1)! (i-k)! (2k-i)!}
+		\end{equation}
+		
+		Since the coefficients $V_i$ only depend on the value of $N$, so they only need to be calculated once. The value of $N$ must be even.
+		
+			\subsubsection{Examples of application of Stehfest's method}
+		
+		\subsection{Method of den Iseger}
+		\subsection{Historical Methods}
 
 	\newpage
 	
