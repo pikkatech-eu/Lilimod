@@ -1,7 +1,10 @@
+import math
+
 import numpy as np
 
 from curve import Curve
 from stehfest import Stehfest
+from liliutils.plotter2 import Plotter
 
 
 def test_context(image: callable, orders: list[int], expected: callable, t_fin: float, dt: float ):
@@ -19,8 +22,8 @@ def test_context(image: callable, orders: list[int], expected: callable, t_fin: 
     curves = list[Curve]()
     values = []
 
-    for t in np.arange(0, t_fin + dt, dt):
-        values.append(t, expected(t))
+    for t in np.arange(dt, t_fin + dt, dt):
+        values.append((t, expected(t)))
 
     exact_curve = Curve()
     exact_curve.values  = values
@@ -32,8 +35,8 @@ def test_context(image: callable, orders: list[int], expected: callable, t_fin: 
     for N in orders:
         sf = Stehfest(N)
         values = []
-        for t in np.arange(0, t_fin + dt, dt):
-            values.append(t, sf.invert(image, t))
+        for t in np.arange(dt, t_fin + dt, dt):
+            values.append((t, sf.invert(image, t)))
 
         curve = Curve()
         curve.values = values
@@ -42,6 +45,18 @@ def test_context(image: callable, orders: list[int], expected: callable, t_fin: 
 
         curves.append(curve)
 
+    # Visualisation
+    plotter = Plotter()
 
-    # visualization
+    plotter.plot(curves)
+
+
+if __name__ == '__main__':
+    def exponent_image(p: float) -> float:
+        return 1 / (1 + p)
+
+    def exponent_expected(t: float) -> float:
+        return math.exp(-t)
+
+    test_context(exponent_image, [6, 8, 10], exponent_expected, 10, 0.05)
 
