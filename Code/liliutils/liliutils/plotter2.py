@@ -72,9 +72,11 @@ class Plotter:
             x = [t[0] for t in curve.values]
             y = [t[1] for t in curve.values]
 
-            self._ax.plot(x, y, linewidth=self._parameters['curve_width'], label=curve.label, antialiased=True, color=curve.color)
-            # the next line is for scatter
-            # ax.scatter(x, y_noisy, color='r', marker='.', linewidth=0.5, label="theory", antialiased=True)
+            if curve.kind == 'line':
+                self._ax.plot(x, y, linewidth=self._parameters['curve_width'], label=curve.label, antialiased=True, color=curve.color)
+            else:
+                self._ax.scatter(x, y, color=curve.color, marker=curve.marker, linewidth=0.5, label=curve.label, antialiased=True)
+
         self._ax.legend(loc='best')
 
         plt.show()
@@ -119,7 +121,7 @@ class Plotter:
         ax.set_xlabel(self._parameters['label_x'])
         ax.set_ylabel(self._parameters['label_y'])
 
-        ax.set_title(['title'])
+        ax.set_title(self._parameters['title'])
 
         plt.grid(visible=True, which='major', color='b', alpha=0.25, linestyle='-', linewidth=0.75)
         plt.grid(visible=True, which='minor', color='r', alpha=0.15, linestyle='-', linewidth=0.5)

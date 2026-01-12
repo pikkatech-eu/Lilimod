@@ -8,6 +8,8 @@ class Curve:
     values: list[tuple[float, float]] = field(default_factory=list)
     label: str = ''
     color: str = 'blue'
+    kind: str  = 'line'   # supported: 'line', 'scatter'
+    marker: str = '.'     # irrelevant if line
 
 if __name__ == '__main__':
     curve = Curve()
