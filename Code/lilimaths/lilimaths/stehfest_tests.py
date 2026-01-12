@@ -7,7 +7,7 @@ from stehfest import Stehfest
 from liliutils.plotter2 import Plotter
 
 
-def test_context(image: callable, orders: list[int], expected: callable, t_fin: float, dt: float ):
+def test_context(image: callable, orders: list[int], expected: callable, t_fin: float, dt: float, **kwargs):
     """
     Tests Stehfest's method for an image-original pair.
     Creates a series of approximate originals with different values of N against the exact original and puts them to a graph.
@@ -46,7 +46,7 @@ def test_context(image: callable, orders: list[int], expected: callable, t_fin: 
         curves.append(curve)
 
     # Visualisation
-    plotter = Plotter()
+    plotter = Plotter(**kwargs)
 
     plotter.plot(curves)
 
@@ -58,5 +58,7 @@ if __name__ == '__main__':
     def exponent_expected(t: float) -> float:
         return math.exp(-t)
 
-    test_context(exponent_image, [6, 8, 10], exponent_expected, 10, 0.05)
+    t_fin = 5
+    dt = 0.01
+    test_context(exponent_image, [6, 8, 10], exponent_expected, t_fin, dt, min_x=dt, max_x=t_fin, digits_x=0, major_step_x = 1, minor_step_x = 0.2)
 
