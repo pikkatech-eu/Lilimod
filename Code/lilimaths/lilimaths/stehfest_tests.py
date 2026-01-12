@@ -93,9 +93,9 @@ if __name__ == '__main__':
     def rectangular_wave2_image(p: float) -> float:
         return (exp(-p) - exp(-(p * 2)))/ p
 
-    k = 1
+    k = 0.8
     def k0_image(p: float) -> float:
-        return (1 / p) * scipy.special.k0(sqrt(k * p))
+        return (1 / p) * scipy.special.k0(2 * sqrt(k * p))
 
     def k0_original(t: float) -> float:
         return 0.5 * scipy.special.exp1(k / t)
@@ -137,19 +137,19 @@ if __name__ == '__main__':
                             't * exp(-t)',
                             'H(t-1)',
                             'H(t-1) - H(t-2)',
-                            'E1(k/t) / (4 pi)'
+                            '0.5 * E1(k/t) / (4 pi)'
                           ]
 
     t_fin = 5
     dt = 0.01
     context_index = 6
 
-    test_context(images[context_index], [2, 4, 6, 12], originals[context_index], t_fin, dt,
+    test_context(images[context_index], [2, 4, 6, 12, 18, 22], originals[context_index], t_fin, dt,
                  size = (8, 6),
                  min_x=dt,
                  max_x=t_fin,
-                 min_y = -0.2,
-                 max_y = 1.2,
+                 min_y = 0,
+                 max_y = 1.0,
                  digits_x=0,
                  major_step_x = 1,
                  minor_step_x = 0.2,
