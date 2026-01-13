@@ -18,6 +18,10 @@ class Stehfest:
         self._order = order
         self._initialize()
 
+    @property
+    def coefficients(self):
+        return self._coefficients
+
     def invert(self, image: callable, t: float) -> float:
         """
         Calculates the value of the original by inverting the Laplace image.
@@ -69,23 +73,12 @@ class Stehfest:
     #endregion
 
 if __name__ == '__main__':
-    def image(p: float) -> float:
-        return 1.0 / (1 + p)
+    import pandas as pd
 
-    sf = Stehfest(6)
+    for N in [2, 4, 6, 8, 10, 12]:
+        sf = Stehfest(N)
+        V = sf.coefficients
 
-    t = 1
+        df = pd.DataFrame(list(enumerate(V)), columns=["i", "V_i"])
 
-    value = sf.invert(image, t)
-
-    print(value, math.exp(-t))
-
-    t = 0.001
-    while t < 5:
-        value = sf.invert(image, t)
-        expected = math.exp(-t)
-        delta = value - expected
-        percent = delta * 100
-
-        print(t, percent)
-        t += 0.2
+        print(df)

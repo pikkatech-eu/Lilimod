@@ -63,11 +63,17 @@ if __name__ == '__main__':
     def exponent_original(t: float) -> float:
         return exp(-t)
 
-    def decaying_sine_image(p: float) -> float:
-        return 1 / (1 + (p + 0.5)**2)
+    def sine_image(p: float) -> float:
+        return 1 / (1 + p**2)
 
-    def decaying_sine_original(t: float) -> float:
-        return exp(-0.5 * t) * sin(t)
+    def sine_original(t: float) -> float:
+        return sin(t)
+
+    def damped_sine_image(p: float) -> float:
+        return 1 / (1 + (p + 0.2)**2)
+
+    def damped_sine_original(t: float) -> float:
+        return exp(-0.2 * t) * sin(t)
 
     def linear_image(p: float) -> float:
         return 1 / p**2
@@ -102,7 +108,8 @@ if __name__ == '__main__':
 
     images              = [
                             exponent_image,
-                            decaying_sine_image,
+                            sine_image,
+                            damped_sine_image,
                             linear_image,
                             exponent_multiplied_image,
                             rectangular_wave_image,
@@ -112,7 +119,8 @@ if __name__ == '__main__':
 
     originals           = [
                             exponent_original,
-                            decaying_sine_original,
+                            sine_original,
+                            damped_sine_original,
                             linear_original,
                             exponent_multiplied_original,
                             rectangular_wave_origin,
@@ -122,17 +130,19 @@ if __name__ == '__main__':
 
     titles              = [
                             "Exponential decay",
-                            "Sinusoidal decay",
-                            "Linear function",
-                            "Exponent multiplied",
+                            "Sine curve",
+                            "Damped sine",
+                            "Linear growth",
+                            "Asymmetric distribution",
+                            "Delayed step function",
                             "Rectangular wave",
-                            "Finite rectangular wave",
                             "Well function"
                           ]
 
     original_equations  = [
                             'exp(-t)',
-                            'exp(-0.5t) * sin (t)',
+                            'sin (t)',
+                            'exp(-0.2t) * sin (t)',
                             't',
                             't * exp(-t)',
                             'H(t-1)',
@@ -142,9 +152,9 @@ if __name__ == '__main__':
 
     t_fin = 5
     dt = 0.01
-    context_index = 6
+    context_index = 7
 
-    test_context(images[context_index], [2, 4, 6, 12, 18, 22], originals[context_index], t_fin, dt,
+    test_context(images[context_index], [2, 4, 6], originals[context_index], t_fin, dt,
                  size = (8, 6),
                  min_x=dt,
                  max_x=t_fin,
@@ -153,8 +163,8 @@ if __name__ == '__main__':
                  digits_x=0,
                  major_step_x = 1,
                  minor_step_x = 0.2,
-                 major_step_y=0.2,
-                 minor_step_y=0.1,
+                 major_step_y = 0.1,
+                 minor_step_y=0.05,
                  title=titles[context_index],
                  label_x = 't',
                  label_y = f'f(t) = {original_equations[context_index]}'
