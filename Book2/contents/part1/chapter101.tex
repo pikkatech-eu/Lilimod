@@ -1,0 +1,75 @@
+\chapter{Ordinary Differential Equations}
+
+Dynamical systems, of natural, technological or mixed structure are very often described in terms of \odes.
+A differential equation is an equation involving derivatives of an unknown function that depends upon one or more independent variables. \cite{tang_2007}. If the unknown function depends on only one independent variable, then the equation is called an ordinary differential equation.
+
+An \ode can be either linear or non-linear. The latter contains a non-linear expression of the unknown function, in a linear \ode all expressions of the unknown function (including its derivatives) are linear. Though non-linear \odes play a great role in the description of dynamical processes, in this treatise we concentrate on linear dynamical systems and therefore restrict our attention on the linear \ode.
+
+An \ode can be represented in the following standard form:
+\begin{equation}\label{ec: linear ode general}
+	a_n \frac{d^ny}{dt^n} + a_{n-1} \frac{d^{n-1}y}{dt^{n-1}} + ... + a_1 \frac{dy}{dt} + a_0 y = f(t),
+\end{equation}
+where $y = y(t)$ is the unknown function, $a_i = a_i(t)$ the coefficients of the \ode, $f(t)$ a known external function. The value $n$ which is supposed to be different from zero is the order of the \ode. To solve the equation (\ref{ec: linear ode general}) one also needs to define the initial conditions, i.e. the values $y_0, y'_0, ..., y_0^{(n-2)}, y_0^{(n-1)}$ of the function and its derivatives up to the order $n-1$ at the moment of time $t=0.$
+
+The coefficients $a_i$ can be either functions of time or constant. In the latter special case we have to do with a linear \ode with constant coefficients. Analytical solutions of linear \odes cannot be obtained in the general case, whereas in the case of \odes with constant coefficients it can be always done in compact form. Fortunately, many interesting and practical dynamical phenomena in nature and technology can be described through linear \ode with constant coefficients. In this treatise we will primarily concentrate on those.
+
+\section{Homogeneous equation}
+If in equation (\ref{ec: linear ode general}) $f(t) = 0$, this is, there is no external force acting,  the \de is called homogeneous. Its general solution can be written down as a sum of basic functions $\varphi_i(t)$:
+\begin{equation}\label{eq: basic functions}
+	y(t) = \sum \limits_{i=1}^n C_i \varphi_i(t),
+\end{equation}
+where $C_i$ are constant coefficients that need to be uniquely defined using the initial conditions. The basic functions $\varphi_i(t)$ depend on the roots of the algebraic characteristic equation
+\begin{equation}\label{eq:characteristic equation}
+	a_n \lambda^n + a_{n-1} \lambda^{n-1} + ... + a_1 \lambda + a_0 = 0.
+\end{equation}
+As is known from algebra, the equation (\ref{eq:characteristic equation}) has exactly $n$ roots. Some of them can be realm some complex (in which case there will always be pairs of conjugated roots); the equation (\ref{eq:characteristic equation}) can also the same root occurring more than once.
+	\paragraph{Examples\\}
+	Characteristic equation $\lambda^2 + \lambda -2 = 0$ has two different real roots, $\lambda_1 = 1$ and $\lambda_2 = -2$. 
+	
+	Characteristic equation $\lambda^2 -2 \lambda + 5 = 0$ has two conjugated roots, $\lambda_1 = 1 + 2 \iu$ and $\lambda_2 = 1 - 2 \iu$, where $\iu = \sqrt{-1}$.
+	
+	Characteristic equation $\lambda^4 + 3 \lambda^3 - 3 \lambda^2 - 11 \lambda - 6 = (\lambda + 1)^2 (\lambda + 3) (\lambda - 2) = 0$
+ 	has two equal roots, $\lambda_1 = \lambda_2 = -1$ and two different other roots $\lambda_3 = -3$ and $\lambda_4 = 2$.
+ 	
+ 	Characteristic function $\varphi_i(t)$ in (\ref{eq: basic functions}) depends oh the character of the root $\lambda_i$:
+ 	\begin{itemize}
+ 		\item If $\lambda_i$ is a simple root of (\ref{eq: basic functions}), $\varphi_i(t) = \E^{\lambda_i t}$
+ 		\item If $\lambda_i$ and $\lambda_{i + 1}$ are conjugated complex roots of  (\ref{eq: basic functions}), $\varphi_i(t) = \E^{\lambda_i t}$ and $\varphi_{i}+1(t) = \E^{\lambda_{i+1} t}$ are basic functions % TODO: replace with cos & sin -> example 2
+ 		\item If $ \lambda $ is a repeated root, witn $m$ occurrences (e.g. $\lambda_1 = \lambda, \lambda_2 = \lambda, ... \lambda_m = \lambda$), the basic functions are $\varphi_1(t) = \E^{\lambda t}, \varphi_2(t) = t \E^{\lambda t}, ..., \varphi_m(t) = t^{m-1} \E^{\lambda t} $ \cite{tang_2007}.
+ 	\end{itemize}
+ 	
+In many practical cases, however, repeated roots of the characteristic equation are rather seldom, so one can suppose that all roots are different, either real or complex, in which case there are always two conjugated ones.
+
+	\paragraph{Examples. Simple linear \odes}
+	\subparagraph{Case 1. Two different real roots of the \che} Our \de is
+	\[ 
+		\frac{d^2y}{dt^2} + \frac{dy}{dt} - 2 y = 0,
+	\]
+	initial conditions: $y(0) = 0, ~y'(0) = 1$.\\
+	\textbf{Solution}. The \che of this \de is $\lambda^2 + \lambda - 2 = 0$, which, as we have seen above has the roots $\lambda_1 = 1$ and $\lambda_2 = -2$. Therefore the general solution of this \de will be
+	\[ 
+		y(t) = C_1 \E^t + C_2 \E^{-2t},
+	\]
+	where $C_1, C_2$ are constants that need to be calculated using the initial conditions. We have $y(t) = C_1 + C_2$, $y'(t) = C_1 \E^t - 2 C_2 \E^{-2t}$, $y'(0) = C_1 - 2 C_2$. \\
+	From the initial conditions we have $C_1 + C_2 = 0,~C_1 - 2 C_2 = 1. $ Solving these equations, we have $C_1 = 1,~C_2 = -1.$ The solution in final form is therefore $y(t) = \E^t - \E^{-2t}.$
+	
+	\subparagraph{Case 2. Two complex conjugated roots of the \che}
+	Let the \de now be 
+	\[ 
+		\frac{d^2y}{dt^2} - 2 \frac{dy}{dt} + 5 y = 0,
+	\]
+	initial conditions: $y(0) = 0, ~y'(0) = 1$.\\
+	\textbf{Solution}. The \che of this \de is $\lambda^2 -2 \lambda + 5 = 0$, which, as we have seen above, has the roots $\lambda_1 = 1 + 2 \iu$ and $\lambda_2 = 1 - 2 \iu$. \\
+	Therefore the general solution of this \de will be
+	\[ 
+		y(t) = C_1 \E^{(1 + 2 \iu)t} + C_2 \E^{(1 - 2 \iu)t},
+	\]
+	
+%In this chapter, after a review of the standard methods for solving
+%first-order differential equations, we will present a comprehensive treatment
+%of linear differential equations with constant coeﬃcients, in terms of which
+%a great many physical problems are formulated. We will use mechanical
+%vibrations and electrical circuits as illustrative examples. Then we will discuss systems of coupled differential equations and their applications.
+%Series solutions of differential equations will be discussed in the chapter on
+%special functions. Another important method of solving differential equation
+%is the Laplace transformation, which we will discuss in the next chapter.

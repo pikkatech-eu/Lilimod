@@ -1,0 +1,40 @@
+%=========== STRUCTURAL ====================================
+% --- Division between part and chapter ---
+\newcommand{\division}[1]{%
+	\cleardoublepage
+	\phantomsection
+	\addcontentsline{toc}{chapter}{#1}
+	\vspace*{3cm}
+	\begin{center}
+		{\Large\bfseries #1}
+	\end{center}
+	\vspace{2cm}
+}
+% pure counter - no prefix
+\newcounter{ReqCounter}
+\newcommand{\req}{\protect\stepcounter{ReqCounter} \textbf{\theReqCounter.}~}
+%===========================================================
+
+%=========== MATH APPARATUS ================================
+\newcommand{\ds}{\displaystyle}
+
+\newcommand{\lt}{Laplace transform\xspace}
+\newcommand{\lti}{Laplace transform inversion\xspace}
+\newcommand{\lop}[1]{\mathcal{L}\{#1\}\xspace}			% Laplace transform operator		
+\newcommand{\ilop}[1]{\mathcal{L}^{-1}\{#1\}\xspace}	% Inverted Laplace transform operator
+
+\newcommand{\de}{differential equation\xspace}
+\newcommand{\ode}{ordinary differential equation\xspace}
+\newcommand{\odes}{ordinary differential equations\xspace}
+\newcommand{\pde}{partial differential equation\xspace}
+\newcommand{\pdes}{partial differential equations\xspace}
+\newcommand{\che}{characteristic equation\xspace}
+%===========================================================
+
+%=========== SPECIAL FUNCTIONS =============================
+\newcommand{\iu}{{i\mkern1mu}}
+\newcommand{\E}{\mathrm{e}}
+\newcommand{\erf}{\mathrm{erf}}
+\newcommand{\erfc}{\mathrm{erfc}}
+\newcommand{\ierfc}{\mathrm{ierfc}}
+\newcommand{\inerfc}{\mathrm{i^{n}erfc}}

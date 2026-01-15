@@ -1,0 +1,31 @@
+\xpg@aux {}{english}
+\contentsline {chapter}{Notation}{iii}{chapter*.2}%
+\contentsline {part}{I\hspace {1em}Foundations}{1}{part.1}%
+\contentsline {chapter}{\numberline {1}Preface}{2}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Mathematical apparatus}{3}{chapter.2}%
+\contentsline {chapter}{\numberline {3}ODE}{4}{chapter.3}%
+\contentsline {chapter}{\numberline {4}PDE}{5}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Laplace Transform}{6}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Laplace Transform Inversion}{7}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Fourier Transform}{8}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Physical phenomena and their equations}{9}{chapter.8}%
+\contentsline {part}{II\hspace {1em}Linear Dynamical Systems}{10}{part.2}%
+\contentsline {chapter}{\numberline {9}Lumped systems}{11}{chapter.9}%
+\contentsline {chapter}{\numberline {10}Electrical circuits}{12}{chapter.10}%
+\contentsline {chapter}{\numberline {11}Linear models in hydrology}{13}{chapter.11}%
+\contentsline {chapter}{\numberline {12}Lumped models in hydrogeology}{14}{chapter.12}%
+\contentsline {chapter}{\numberline {13}Models of springs}{15}{chapter.13}%
+\contentsline {chapter}{\numberline {14}Distributed systems}{16}{chapter.14}%
+\contentsline {chapter}{\numberline {15}Electromagnetic phenomena}{17}{chapter.15}%
+\contentsline {chapter}{\numberline {16}Heat transfer}{18}{chapter.16}%
+\contentsline {chapter}{\numberline {17}Diffusion}{19}{chapter.17}%
+\contentsline {chapter}{\numberline {18}Open channel hydraulics}{20}{chapter.18}%
+\contentsline {chapter}{\numberline {19}Geofiltration}{21}{chapter.19}%
+\contentsline {part}{III\hspace {1em}Linear dynamical models of geofiltration}{22}{part.3}%
+\contentsline {chapter}{\numberline {20}Semi-infinite aquifers}{23}{chapter.20}%
+\contentsline {chapter}{\numberline {21}Quadrant aquifers}{24}{chapter.21}%
+\contentsline {chapter}{\numberline {22}Band aquifers}{25}{chapter.22}%
+\contentsline {chapter}{\numberline {23}Half-band aquifers}{26}{chapter.23}%
+\contentsline {chapter}{\numberline {24}Rectangular aquifers}{27}{chapter.24}%
+\contentsline {chapter}{\numberline {25}Wedge aquifers}{28}{chapter.25}%
+\contentsline {chapter}{\numberline {26}Circular aquifers}{29}{chapter.26}%

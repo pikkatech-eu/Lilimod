@@ -1,0 +1,93 @@
+% !TeX program = xelatex
+
+\author{Stanislav Koncebovski}
+\title{Linear Dynamical Systems}
+
+\documentclass[12pt,oneside]{book}
+
+\input{preamble}
+\input{commands}
+
+\begin{document}
+	%=======================================================
+	\frontmatter
+	%=======================================================
+	\input{title}
+	\input{preface}
+	\input{notation}
+	
+	\maketitle
+	
+	\frontmatter
+	\tableofcontents
+	
+	\mainmatter
+	
+	%=======================================================
+	\part{Mathematical apparatus}
+	%=======================================================
+	\chapter*{Preface}
+		% TODO (1) Here I explain why I put the apparatus before the definition of the sudy, the linear dynamical systems.
+	
+	%\chapter {ODE}	% TODO (2) 
+	\input{contents/part1/chapter101}
+	\chapter {Laplace transform}	% TODO (3) 
+		\section {Definitions}
+		\section {Properties}
+		\section {Solving of ODE}
+		\section {Inversion}
+		\section {Tables} % TODO (4): tables of Laplace Transform in appendix
+		\section {Numerical inversion} % TODO (5)
+			\subsection {Stehfest}
+			\subsection {den Iseger}
+	\chapter {PDE}	% TODO(6)
+	\chapter {Fourier transform}
+		\section {Definitions}
+		\section {Properties}
+		\section {Solving of PDE}
+		\section {Inversion}
+		\section {Tables}
+		\section {Numerical inversion} %(?)
+	
+	%=======================================================
+	\part{Dynamical linear systems and their models}
+	%=======================================================
+	\chapter{Preface}
+	\division {Lumped dynamical linear systems}
+		\chapter {Electrical circuits}
+		\chapter {Ebbinghaus}
+		\chapter {River flow models}
+		\chapter {Lumped modes in hydrogeology}
+		\chapter {Springs}
+	
+	\division {Distributed dynamical linear systems}
+		\chapter {Electromagnetism} % telegraph equation
+		\chapter {Open channel hydraulics} % linearized
+		\chapter {Heat transfer}
+		\chapter {Diffusion}
+		\chapter {Geofiltration} % simplest configuration: unbounded aquifer
+	
+	%=======================================================
+	\part{Linear dynamical models in geofiltration}
+	%=======================================================
+	\chapter {Introduction} % Model zoo and what it is all about
+	\division {Homogeneous aquifers}
+		\chapter{Semi-infinite aquifers}
+		\chapter{Quadrant aquifers}
+		\chapter{Band aquifers}
+		\chapter{Half-band aquifers}
+		\chapter{Rectangular aquifers}
+		\chapter{Wedge aquifers}
+		\chapter{Circular aquifers}
+	\division {Heterogeneous aquifers}
+	
+	\bibliographystyle{ieeetr}
+	\bibliography{bibliography/references}
+	
+	\backmatter
+	%\printindex
+	
+\end{document}
+
+
+

@@ -1,0 +1,73 @@
+\documentclass[12pt,oneside]{book}
+% Alternative outline
+\input{preamble}
+\input{commands}
+
+\begin{document}
+
+\frontmatter
+%\input{frontmatter/title}
+%\input{frontmatter/preface}
+%\input{frontmatter/notation}
+
+\tableofcontents
+
+\chapter*{Notation}
+\addcontentsline{toc}{chapter}{Notation}
+\input{notation_master}
+
+\mainmatter
+
+\part{Foundations}
+\chapter{Preface}
+% Here I explain why I put the apparatus before the definition of the sudy, the linear dynamical systems.
+
+\chapter{Mathematical apparatus}
+\chapter{ODE}
+\chapter{PDE}
+\chapter{Laplace Transform}
+\chapter{Laplace Transform Inversion}
+\chapter{Fourier Transform}
+\chapter{Physical phenomena and their equations}
+% Electrical processes, heat transfer, diffusion, Darcy, Saint-Venan, ...
+	
+%\input{chapters/part_1/ch_01}
+%\input{chapters/part_1/ch_02}
+%\input{chapters/part_1/ch_03}
+
+\part{Linear Dynamical Systems}
+\chapter{Lumped systems}
+\chapter{Electrical circuits}
+\chapter{Linear models in hydrology} % Rainfall-flow models etc.
+\chapter{Lumped models in hydrogeology} 
+\chapter{Models of springs} 
+
+\chapter{Distributed systems}
+\chapter{Electromagnetic phenomena} % Telegraph equation
+\chapter{Heat transfer}
+\chapter{Diffusion}
+\chapter{Open channel hydraulics}
+\chapter{Geofiltration}
+
+%\input{chapters/part_2/ch_04}
+
+\part{Linear dynamical models of geofiltration}
+\chapter{Semi-infinite aquifers}
+\chapter{Quadrant aquifers}
+\chapter{Band aquifers}
+\chapter{Half-band aquifers}
+\chapter{Rectangular aquifers}
+\chapter{Wedge aquifers}
+\chapter{Circular aquifers}
+% \input{chapters/part_3/model_zoo}
+
+\appendix
+\input{chapters/appendix/a_01}
+
+\bibliographystyle{ieeetr}
+\bibliography{bibliography/references}
+
+\backmatter
+\printindex
+
+\end{document}
