@@ -65,7 +65,7 @@ ISEGER_COEFFICIENTS_48 = [
 ]
 
 def invert \
-                (
+        (
                 laplace_image: callable,
                 delta_t: float,
                 number_of_values: int,
@@ -85,7 +85,6 @@ def invert \
                                 of the  Laplace image (https://en.wikipedia.org/wiki/Inverse_Laplace_transform).
     :param quadrature_degree:   The degree of Gauss quadrature (supported values are 16, 32, 48).
     :return:                    Array of values of the original function in points k * deltaT, k = 0, ..., m.
-    TODO: Results are wrong; debugging needed!
     """
     if delta_t <= 0:
         raise ArithmeticError(f"The value of time step is invalid: {delta_t}.")

@@ -1,16 +1,17 @@
 from math import exp, sin, pi, sqrt
+import cmath
 
 import numpy as np
 import scipy.special
 
 from curve import Curve
 from deviations import Deviations
-from stehfest import Stehfest
+from iseger import invert
 from liliutils.plotter2 import Plotter
 
 COLORS = ['red', 'blue', 'green', 'black', 'magenta', 'gray', 'orange']
 
-def test_context(image: callable, orders: list[int], expected: callable, t_fin: float, dt: float, **kwargs):
+def test_context(image: callable, expected: callable, dt: float, number_of_points: int, critical_abscissa:float =0, quadrature_order = 16, **kwargs):
     """
     Tests Stehfest's method for an image-original pair.
     Creates a series of approximate originals with different values of N against the exact original and puts them to a graph.
@@ -22,11 +23,32 @@ def test_context(image: callable, orders: list[int], expected: callable, t_fin: 
     @param dt:          Time step.
     @return:            None.
     """
-    curves = list[Curve]()
-    values = []
 
-    for t in np.arange(dt, t_fin + dt, dt):
-        values.append((t, expected(t)))
+    curves = list[Curve]()
+    inverted = invert(image, dt, number_of_points, critical_abscissa, quadrature_order)
+
+    max_difference = 0
+    values = []
+    for i in range(len(inverted)):
+        inverted_value = inverted[i]
+        exact_value = expected(dt * i)
+        values.append((i * dt, inverted_value))
+
+        difference = abs(inverted_value - exact_value)
+        if difference > max_difference:
+            max_difference = difference
+
+    curve = Curve()
+    curve.values = values
+    curve.label = "den Iseger"
+    curve.color = 'blue'
+    curve.kind = 'scatter'
+
+    curves.append(curve)
+
+    values = []
+    for i in range(len(curve.values) + 1):
+        values.append((dt * i, expected(dt * i)))
 
     exact_curve = Curve()
     exact_curve.values  = values
@@ -35,93 +57,62 @@ def test_context(image: callable, orders: list[int], expected: callable, t_fin: 
 
     curves.append(exact_curve)
 
-    deviations = Deviations()
-    color_index = 1
-    for N in orders:
-        sf = Stehfest(N)
-        values = []
-
-        deviations.values[N] = [0, 0, 0]
-
-        for t in np.arange(dt, t_fin + 5 * dt, 5 * dt):
-            calculated = sf.invert(image, t)
-            exact = expected(t)
-
-            values.append((t, calculated))
-
-            deviation = abs(exact - calculated)
-            percent = (deviation / exact) * 100
-
-            if deviation > deviations.values[N][1]:
-                deviations.values[N][0] = t
-                deviations.values[N][1] = deviation
-                deviations.values[N][2] = percent
-
-        curve = Curve()
-        curve.values = values
-        curve.label = f"N = {N}"
-        curve.color = COLORS[color_index]
-        curve.kind = 'scatter'
-        color_index += 1
-
-        curves.append(curve)
-
     # Visualisation
     plotter = Plotter(**kwargs)
 
     plotter.plot(curves)
 
-    return deviations.values
+    print(max_difference)
 
 if __name__ == '__main__':
-    def exponent_image(p: float) -> float:
+    def exponent_image(p: complex) -> complex:
         return 1 / (1 + p)
 
     def exponent_original(t: float) -> float:
         return exp(-t)
 
-    def sine_image(p: float) -> float:
+    def sine_image(p: complex) -> complex:
         return 1 / (1 + p**2)
 
     def sine_original(t: float) -> float:
         return sin(t)
 
-    def damped_sine_image(p: float) -> float:
+    def damped_sine_image(p: complex) -> complex:
         return 1 / (1 + (p + 0.2)**2)
 
     def damped_sine_original(t: float) -> float:
         return exp(-0.2 * t) * sin(t)
 
-    def linear_image(p: float) -> float:
+    def linear_image(p: complex) -> complex:
         return 1 / p**2
 
     def linear_original(t: float) -> float:
         return t
 
-    def exponent_multiplied_image(p: float) -> float:
+    def exponent_multiplied_image(p: complex) -> complex:
         return 1 / (p + 1)**2
 
     def exponent_multiplied_original(t: float) -> float:
         return t * exp(-t)
 
-    def rectangular_wave_image(p: float) -> float:
-        return exp(-p) / p
+    def rectangular_wave_image(p: complex) -> complex:
+        return cmath.exp(-p) / p
 
     def rectangular_wave_origin(t: float) -> float:
         return 0 if t <= 1 else 1
 
-    def rectangular_wave2_origin(t: float) -> float:
+    def rectangular_wave2_origin(t: complex) -> complex:
         return 1 if 1 <= t <= 2 else 0
 
     def rectangular_wave2_image(p: float) -> float:
-        return (exp(-p) - exp(-(p * 2)))/ p
+        return (cmath.exp(-p) - cmath.exp(-(p * 2)))/ p
 
     k = 0.8
-    def k0_image(p: float) -> float:
-        return (1 / p) * scipy.special.k0(2 * sqrt(k * p))
+    def k0_image(p: complex) -> complex:
+        return (1 / p) * scipy.special.kv(0, 2 * cmath.sqrt(k * p))
 
     def k0_original(t: float) -> float:
-        return 0.5 * scipy.special.exp1(k / t)
+        return 0.5 * scipy.special.exp1(k / (t + 0.0001))
 
     images              = [
                             exponent_image,
@@ -167,25 +158,25 @@ if __name__ == '__main__':
                             '0.5 * E1(k/t) / (4 pi)'
                           ]
 
-    t_fin = 5
-    dt = 0.01
+    dt = 0.05
+    number_of_points =300
     context_index = 7
-
-    max_deviation = test_context(images[context_index], [2,4,6], originals[context_index], t_fin, dt,
-                 size = (8, 6),
-                 min_x=dt,
-                 max_x=t_fin,
-                 min_y = 0,
-                 max_y = 1.0,
-                 digits_x=0,
+    test_context(images[context_index], originals[context_index], dt, number_of_points, 0, quadrature_order=16,
+                 size=(8, 6),
+                 max_x= 5,
                  major_step_x = 1,
-                 minor_step_x = 0.2,
-                 major_step_y = 0.1,
+                 minor_step_x = 0.5,
+
+                 major_step_y=0.1,
                  minor_step_y=0.05,
+                 min_y=0,
+                 max_y=0.8,
+                 digits_x = 0,
+                 digits_y=1,
                  title=titles[context_index],
-                 label_x = 't',
-                 label_y = f'f(t) = {original_equations[context_index]}'
+                 label_x='t',
+                 label_y=f'f(t) = {original_equations[context_index]}'
                  )
 
-    print(context_index, max_deviation)
+
 

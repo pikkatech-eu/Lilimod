@@ -75,7 +75,7 @@ class Plotter:
             if curve.kind == 'line':
                 self._ax.plot(x, y, linewidth=self._parameters['curve_width'], label=curve.label, antialiased=True, color=curve.color)
             else:
-                self._ax.scatter(x, y, color=curve.color, marker=curve.marker, linewidth=0.25, label=curve.label, antialiased=True)
+                self._ax.scatter(x[::10], y[::10], 80, color=curve.color, marker=curve.marker, linewidth=0.25, label=curve.label, antialiased=True)
 
         self._ax.legend(loc='best')
 

@@ -1,12 +1,12 @@
 Linear Models in Distributed Linear Systems
 [Start: 2026-01-04]
 ChatGPT:
-	One chapter = one unit of thought
+	One chapter		= one unit of thought
 	A practical mental rule:
-		part = conceptual layer
-		chapter = one coherent idea
-		section = one argument
-		subsection = one claim
+		part		= conceptual layer
+		chapter		= one coherent idea
+		section		= one argument
+		subsection	= one claim
 
 If a chapter starts feeling “messy”, split it.
 Part I. Philosophy and Mathematics
