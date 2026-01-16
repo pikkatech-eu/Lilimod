@@ -6,15 +6,15 @@ A differential equation is an equation involving derivatives of an unknown funct
 An \ode can be either linear or non-linear. The latter contains a non-linear expression of the unknown function, in a linear \ode all expressions of the unknown function (including its derivatives) are linear. Though non-linear \odes play a great role in the description of dynamical processes, in this treatise we concentrate on linear dynamical systems and therefore restrict our attention on the linear \ode.
 
 An \ode can be represented in the following standard form:
-\begin{equation}\label{ec: linear ode general}
+\begin{equation}\label{eq: linear ode general}
 	a_n \frac{d^ny}{dt^n} + a_{n-1} \frac{d^{n-1}y}{dt^{n-1}} + ... + a_1 \frac{dy}{dt} + a_0 y = f(t),
 \end{equation}
-where $y = y(t)$ is the unknown function, $a_i = a_i(t)$ the coefficients of the \ode, $f(t)$ a known external function. The value $n$ which is supposed to be different from zero is the order of the \ode. To solve the equation (\ref{ec: linear ode general}) one also needs to define the initial conditions, i.e. the values $y_0, y'_0, ..., y_0^{(n-2)}, y_0^{(n-1)}$ of the function and its derivatives up to the order $n-1$ at the moment of time $t=0.$
+where $y = y(t)$ is the unknown function, $a_i = a_i(t)$ the coefficients of the \ode, $f(t)$ a known external function. The value $n$ which is supposed to be different from zero is the order of the \ode. To solve the equation (\ref{eq: linear ode general}) one also needs to define the initial conditions, i.e. the values $y_0, y'_0, ..., y_0^{(n-2)}, y_0^{(n-1)}$ of the function and its derivatives up to the order $n-1$ at the moment of time $t=0.$
 
 The coefficients $a_i$ can be either functions of time or constant. In the latter special case we have to do with a linear \ode with constant coefficients. Analytical solutions of linear \odes cannot be obtained in the general case, whereas in the case of \odes with constant coefficients it can be always done in compact form. Fortunately, many interesting and practical dynamical phenomena in nature and technology can be described through linear \ode with constant coefficients. In this treatise we will primarily concentrate on those.
 
 \section{Homogeneous equation}
-If in equation (\ref{ec: linear ode general}) $f(t) = 0$, this is, there is no external force acting,  the \de is called homogeneous. Its general solution can be written down as a sum of basic functions $\varphi_i(t)$:
+If in equation (\ref{eq: linear ode general}) $f(t) = 0$, this is, there is no external force acting,  the \de is called homogeneous. Its general solution can be written down as a sum of basic functions $\varphi_i(t)$:
 \begin{equation}\label{eq: basic functions}
 	y(t) = \sum \limits_{i=1}^n C_i \varphi_i(t),
 \end{equation}
@@ -34,7 +34,7 @@ As is known from algebra, the equation (\ref{eq:characteristic equation}) has ex
  	Characteristic function $\varphi_i(t)$ in (\ref{eq: basic functions}) depends oh the character of the root $\lambda_i$:
  	\begin{itemize}
  		\item If $\lambda_i$ is a simple root of (\ref{eq: basic functions}), $\varphi_i(t) = \E^{\lambda_i t}$
- 		\item If $\lambda_i$ and $\lambda_{i + 1}$ are conjugated complex roots of  (\ref{eq: basic functions}), $\varphi_i(t) = \E^{\lambda_i t}$ and $\varphi_{i}+1(t) = \E^{\lambda_{i+1} t}$ are basic functions % TODO: replace with cos & sin -> example 2
+ 		\item If $\lambda_i$ and $\lambda_{i + 1}$ are conjugated complex roots of  (\ref{eq: basic functions}), $\varphi_i(t) = \E^{\lambda_i t}$ and $\varphi_{i}+1(t) = \E^{\lambda_{i+1} t}$ are basic functions 
  		\item If $ \lambda $ is a repeated root, witn $m$ occurrences (e.g. $\lambda_1 = \lambda, \lambda_2 = \lambda, ... \lambda_m = \lambda$), the basic functions are $\varphi_1(t) = \E^{\lambda t}, \varphi_2(t) = t \E^{\lambda t}, ..., \varphi_m(t) = t^{m-1} \E^{\lambda t} $ \cite{tang_2007}.
  	\end{itemize}
  	
@@ -62,14 +62,20 @@ In many practical cases, however, repeated roots of the characteristic equation 
 	\textbf{Solution}. The \che of this \de is $\lambda^2 -2 \lambda + 5 = 0$, which, as we have seen above, has the roots $\lambda_1 = 1 + 2 \iu$ and $\lambda_2 = 1 - 2 \iu$. \\
 	Therefore the general solution of this \de will be
 	\[ 
-		y(t) = C_1 \E^{(1 + 2 \iu)t} + C_2 \E^{(1 - 2 \iu)t},
+		y(t) = C_1 \E^{(1 + 2 \iu)t} + C_2 \E^{(1 - 2 \iu)t}.
 	\]
 	
-%In this chapter, after a review of the standard methods for solving
-%first-order differential equations, we will present a comprehensive treatment
-%of linear differential equations with constant coeﬃcients, in terms of which
-%a great many physical problems are formulated. We will use mechanical
-%vibrations and electrical circuits as illustrative examples. Then we will discuss systems of coupled differential equations and their applications.
-%Series solutions of differential equations will be discussed in the chapter on
-%special functions. Another important method of solving differential equation
-%is the Laplace transformation, which we will discuss in the next chapter.
+	From the initial conditions, we have $C_1 + C_2 = 0, ~ (1 + 2 \iu) C_1 + (1 - 2 \iu) C_2 = 1$ whence $\ds C_1 = \frac{1}{\lambda_1 - \lambda_2} = \frac{1}{4 \iu},~  C_2 = - \frac{1}{4 \iu}$ and
+	\[ 
+	y(t) = \frac{1}{4 \iu} \left[ \E1{(1 + 2 \iu) t } - \E1{(1 - 2 \iu) t } \right] = \frac{1}{4 \iu} \E^t \left( \E^{2\iu t}  -  \E^{-2\iu t} \right).
+	\]
+	
+	Since\cite{Abramowitz1964}  $\ds \frac{1}{2 \iu} \left( \E^{2\iu t}  -  \E^{-2\iu t} \right) = \sin 2t$ , we obtain that $y(t) = \frac{1}{2} \E^t \sin 2t$.
+	
+	\section{Non-homogeneous equation}
+	In the case when $f(t) \neq 0$ in the right part of (\ref{eq: linear ode general}) there is no receipt to obtain the solution straightforwardly. The general idea is to find a particular solution of (\ref{eq: linear ode general}) and to combine it with the solution of the homogeneous equation \cite{tang_2007} in the form of a linear combination with undefined coefficients, The latter can then be computed out of the initial conditions. 
+	
+	However, there is no general recipe how to obtain the particular solution for an arbitrary right part function $f(t)$. Textbooks only provide methods for a few classes of right-part functions. 
+	
+	A general method of solving linear \odes with constant coefficients and arbitrary external forcing $f(t)$ is given by the \lt which will be the subject of the next chapter.
+	
