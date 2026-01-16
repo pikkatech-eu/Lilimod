@@ -8,57 +8,59 @@
 \contentsline {subparagraph}{Case 1. Two different real roots of the characteristic equation\xspace }{5}{section*.6}%
 \contentsline {subparagraph}{Case 2. Two complex conjugated roots of the characteristic equation\xspace }{5}{section*.7}%
 \contentsline {section}{\numberline {1.2}Non-homogeneous equation}{6}{section.1.2}%
-\contentsline {chapter}{\numberline {2}Laplace Transform}{7}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Definitions}{7}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Some properties of Laplace transform\xspace }{8}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Linearity\\}{8}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Laplace transform\xspace of derivative\\}{8}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Laplace transform\xspace of higher derivatives\\}{9}{subsection.2.2.3}%
-\contentsline {subsection}{\numberline {2.2.4}Laplace transform\xspace of integral\\}{9}{subsection.2.2.4}%
-\contentsline {subsection}{\numberline {2.2.5}Laplace transform\xspace of repeated integral\\}{9}{subsection.2.2.5}%
-\contentsline {subsection}{\numberline {2.2.6}Limit values\\}{10}{subsection.2.2.6}%
-\contentsline {subsection}{\numberline {2.2.7}Time shift\\}{10}{subsection.2.2.7}%
-\contentsline {section}{\numberline {2.3}Images of some basic functions}{10}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Heaviside's unitary step}{10}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Linear function}{11}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Exponential function}{11}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}Dirac's delta function}{11}{subsection.2.3.4}%
-\contentsline {section}{\numberline {2.4}Solution of ordinary differential equations\xspace }{13}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Inversion}{13}{section.2.5}%
-\contentsline {section}{\numberline {2.6}Tables}{14}{section.2.6}%
-\contentsline {section}{\numberline {2.7}Numerical inversion}{14}{section.2.7}%
-\contentsline {subsection}{\numberline {2.7.1}Stehfest}{14}{subsection.2.7.1}%
-\contentsline {subsection}{\numberline {2.7.2}den Iseger}{14}{subsection.2.7.2}%
-\contentsline {chapter}{\numberline {3}PDE}{15}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Fourier transform}{16}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Definitions}{16}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Properties}{16}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Solving of PDE}{16}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Inversion}{16}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Tables}{16}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Numerical inversion}{16}{section.4.6}%
-\contentsline {part}{II\hspace {1em}Dynamical linear systems and their models}{17}{part.2}%
-\contentsline {chapter}{\numberline {5}Preface}{18}{chapter.5}%
-\contentsline {chapter}{Lumped dynamical linear systems}{19}{section*.8}%
-\contentsline {chapter}{\numberline {6}Electrical circuits}{20}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Ebbinghaus}{21}{chapter.7}%
-\contentsline {chapter}{\numberline {8}River flow models}{22}{chapter.8}%
-\contentsline {chapter}{\numberline {9}Lumped modes in hydrogeology}{23}{chapter.9}%
-\contentsline {chapter}{\numberline {10}Springs}{24}{chapter.10}%
-\contentsline {chapter}{Distributed dynamical linear systems}{25}{section*.9}%
-\contentsline {chapter}{\numberline {11}Electromagnetism}{26}{chapter.11}%
-\contentsline {chapter}{\numberline {12}Open channel hydraulics}{27}{chapter.12}%
-\contentsline {chapter}{\numberline {13}Heat transfer}{28}{chapter.13}%
-\contentsline {chapter}{\numberline {14}Diffusion}{29}{chapter.14}%
-\contentsline {chapter}{\numberline {15}Geofiltration}{30}{chapter.15}%
-\contentsline {part}{III\hspace {1em}Linear dynamical models in geofiltration}{31}{part.3}%
-\contentsline {chapter}{\numberline {16}Introduction}{32}{chapter.16}%
-\contentsline {chapter}{Homogeneous aquifers}{33}{section*.10}%
-\contentsline {chapter}{\numberline {17}Semi-infinite aquifers}{34}{chapter.17}%
-\contentsline {chapter}{\numberline {18}Quadrant aquifers}{35}{chapter.18}%
-\contentsline {chapter}{\numberline {19}Band aquifers}{36}{chapter.19}%
-\contentsline {chapter}{\numberline {20}Half-band aquifers}{37}{chapter.20}%
-\contentsline {chapter}{\numberline {21}Rectangular aquifers}{38}{chapter.21}%
-\contentsline {chapter}{\numberline {22}Wedge aquifers}{39}{chapter.22}%
-\contentsline {chapter}{\numberline {23}Circular aquifers}{40}{chapter.23}%
-\contentsline {chapter}{Heterogeneous aquifers}{41}{section*.11}%
+\contentsline {chapter}{\numberline {2}Laplace Transform}{8}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Definitions}{8}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Some properties of Laplace transform\xspace }{9}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Linearity\\}{9}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Laplace transform\xspace of derivative\\}{9}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Laplace transform\xspace of higher derivatives\\}{10}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Laplace transform\xspace of integral\\}{10}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}Laplace transform\xspace of repeated integral\\}{10}{subsection.2.2.5}%
+\contentsline {subsection}{\numberline {2.2.6}Limit values\\}{11}{subsection.2.2.6}%
+\contentsline {subsection}{\numberline {2.2.7}Time shift\\}{11}{subsection.2.2.7}%
+\contentsline {section}{\numberline {2.3}Images of some basic functions}{11}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Heaviside's unitary step}{11}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Linear function}{12}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Exponential function}{12}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Dirac's delta function}{12}{subsection.2.3.4}%
+\contentsline {section}{\numberline {2.4}Solution of ordinary differential equations\xspace }{14}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Inversion}{14}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Tables}{15}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Numerical inversion}{15}{section.2.7}%
+\contentsline {subsection}{\numberline {2.7.1}Stehfest}{15}{subsection.2.7.1}%
+\contentsline {subsection}{\numberline {2.7.2}den Iseger}{15}{subsection.2.7.2}%
+\contentsline {chapter}{\numberline {3}PDE}{16}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Fourier transform}{17}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Definitions}{17}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Properties}{17}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Solving of PDE}{17}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Inversion}{17}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Tables}{17}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Numerical inversion}{17}{section.4.6}%
+\contentsline {part}{II\hspace {1em}Dynamical linear systems and their models}{18}{part.2}%
+\contentsline {chapter}{\numberline {5}Preface}{19}{chapter.5}%
+\contentsline {chapter}{Lumped dynamical linear systems}{20}{section*.8}%
+\contentsline {chapter}{\numberline {6}Electrical circuits}{21}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Ebbinghaus}{22}{chapter.7}%
+\contentsline {chapter}{\numberline {8}River flow models}{23}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Lumped modes in hydrogeology}{24}{chapter.9}%
+\contentsline {chapter}{\numberline {10}Springs}{25}{chapter.10}%
+\contentsline {chapter}{Distributed dynamical linear systems}{26}{section*.9}%
+\contentsline {chapter}{\numberline {11}Electromagnetism}{27}{chapter.11}%
+\contentsline {chapter}{\numberline {12}Open channel hydraulics}{28}{chapter.12}%
+\contentsline {chapter}{\numberline {13}Heat transfer}{29}{chapter.13}%
+\contentsline {chapter}{\numberline {14}Diffusion}{30}{chapter.14}%
+\contentsline {chapter}{\numberline {15}Geofiltration}{31}{chapter.15}%
+\contentsline {part}{III\hspace {1em}Linear dynamical models in geofiltration}{32}{part.3}%
+\contentsline {chapter}{\numberline {16}Introduction}{33}{chapter.16}%
+\contentsline {chapter}{Homogeneous aquifers}{34}{section*.10}%
+\contentsline {chapter}{\numberline {17}Semi-infinite aquifers}{35}{chapter.17}%
+\contentsline {chapter}{\numberline {18}Quadrant aquifers}{36}{chapter.18}%
+\contentsline {chapter}{\numberline {19}Band aquifers}{37}{chapter.19}%
+\contentsline {chapter}{\numberline {20}Half-band aquifers}{38}{chapter.20}%
+\contentsline {chapter}{\numberline {21}Rectangular aquifers}{39}{chapter.21}%
+\contentsline {chapter}{\numberline {22}Wedge aquifers}{40}{chapter.22}%
+\contentsline {chapter}{\numberline {23}Circular aquifers}{41}{chapter.23}%
+\contentsline {chapter}{Heterogeneous aquifers}{42}{section*.11}%
+\contentsline {chapter}{Appendices}{43}{section*.12}%
+\contentsline {chapter}{\numberline {A}Table of Laplace Transforms}{44}{appendix.1.A}%

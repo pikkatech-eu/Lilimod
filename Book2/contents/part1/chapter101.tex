@@ -42,9 +42,9 @@ In many practical cases, however, repeated roots of the characteristic equation 
 
 	\paragraph{Examples. Simple linear \odes}
 	\subparagraph{Case 1. Two different real roots of the \che} Our \de is
-	\[ 
-		\frac{d^2y}{dt^2} + \frac{dy}{dt} - 2 y = 0,
-	\]
+	\begin{equation}\label{eq: simple linear ode example 1}
+		\frac{d^2y}{dt^2} + \frac{dy}{dt} - 2 y = 0,	
+	\end{equation}
 	initial conditions: $y(0) = 0, ~y'(0) = 1$.\\
 	\textbf{Solution}. The \che of this \de is $\lambda^2 + \lambda - 2 = 0$, which, as we have seen above has the roots $\lambda_1 = 1$ and $\lambda_2 = -2$. Therefore the general solution of this \de will be
 	\[ 
@@ -75,7 +75,33 @@ In many practical cases, however, repeated roots of the characteristic equation 
 	\section{Non-homogeneous equation}
 	In the case when $f(t) \neq 0$ in the right part of (\ref{eq: linear ode general}) there is no receipt to obtain the solution straightforwardly. The general idea is to find a particular solution of (\ref{eq: linear ode general}) and to combine it with the solution of the homogeneous equation \cite{tang_2007} in the form of a linear combination with undefined coefficients, The latter can then be computed out of the initial conditions. 
 	
-	However, there is no general recipe how to obtain the particular solution for an arbitrary right part function $f(t)$. Textbooks only provide methods for a few classes of right-part functions. 
+	For instance, if the right-part function is a polynomial, a partial solution of \eqref{eq: simple linear ode example 1} can be also looked for in the form of a polynomial of $t$ \cite{tang_2007}. For example, for the equation \eqref{eq: simple linear ode example 1} a partial solution can be looked for in the form of $\tilde{y}(t) = a t^2 + bt + c.$ Since $\tilde{y}'(t) = 2 a t + b$ and $\tilde{y}''(t) = 2a$, substituting into \eqref{eq: simple linear ode example 1} we obtain that the partial solution is 
+	\begin{equation}\label{eq:partial solution example 1}
+		\tilde{y}(t) = -\frac{k}{2} t - \frac{1}{4}.
+	\end{equation}
+	The general solution of \eqref{eq: simple linear ode example 1} needs to be looked for as 
+	\[ 
+		y(t) = C_1 \E^t + C_2 \E^{-2t} + \tilde{y}(t).
+    \]
+    
+    From the initial conditions $y(0) = 0, ~y'(0) = 1$ we have that 
+    \[ 
+      \begin{aligned}
+    	C_1 + C_2 - \frac{1}{4} k  &= 0 \\
+    	C_1 - 2C_2 - \frac{1}{12} k &= 1.
+      \end{aligned}
+    \]
+	
+	Solving the above system of two linear equations with respect to $C_1, C_2$ we obtain that
+	\[ 
+		C_1 = \frac{k + 1}{3}, ~C_2 = -\frac{1}{3}\left( 1 + \frac{k}{4} \right)
+	\]
+	and
+	\[ 
+		y(t) = \frac{k + 1}{3} \E^t -\frac{k + 4}{12} \E^{-2t} - \frac{k}{4} (2t + 1).
+	\]
+	
+	No general recipe to obtain a particular solution for an arbitrary right part function $f(t)$ however exists. Textbooks only provide methods for a few classes of right-part functions, like the polynomial case in the example above. 
 	
 	A general method of solving linear \odes with constant coefficients and arbitrary external forcing $f(t)$ is given by the \lt which will be the subject of the next chapter.
 	
