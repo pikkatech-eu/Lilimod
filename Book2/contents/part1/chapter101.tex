@@ -55,9 +55,10 @@ In many practical cases, however, repeated roots of the characteristic equation 
 	
 	\subparagraph{Case 2. Two complex conjugated roots of the \che}
 	Let the \de now be 
-	\[ 
+	\begin{equation}\label{eq:}
 		\frac{d^2y}{dt^2} - 2 \frac{dy}{dt} + 5 y = 0,
-	\]
+	\end{equation}
+	
 	initial conditions: $y(0) = 0, ~y'(0) = 1$.\\
 	\textbf{Solution}. The \che of this \de is $\lambda^2 -2 \lambda + 5 = 0$, which, as we have seen above, has the roots $\lambda_1 = 1 + 2 \iu$ and $\lambda_2 = 1 - 2 \iu$. \\
 	Therefore the general solution of this \de will be
@@ -72,7 +73,7 @@ In many practical cases, however, repeated roots of the characteristic equation 
 	
 	Since\cite{Abramowitz1964}  $\ds \frac{1}{2 \iu} \left( \E^{2\iu t}  -  \E^{-2\iu t} \right) = \sin 2t$ , we obtain that $y(t) = \frac{1}{2} \E^t \sin 2t$.
 	
-	\section{Non-homogeneous equation}
+	\section{Non-homogeneous equation}\label{sec:Non-homogeneous equation}
 	In the case when $f(t) \neq 0$ in the right part of (\ref{eq: linear ode general}) there is no receipt to obtain the solution straightforwardly. The general idea is to find a particular solution of (\ref{eq: linear ode general}) and to combine it with the solution of the homogeneous equation \cite{tang_2007} in the form of a linear combination with undefined coefficients, The latter can then be computed out of the initial conditions. 
 	
 	For instance, if the right-part function is a polynomial, a partial solution of \eqref{eq: simple linear ode example 1} can be also looked for in the form of a polynomial of $t$ \cite{tang_2007}. For example, for the equation \eqref{eq: simple linear ode example 1} a partial solution can be looked for in the form of $\tilde{y}(t) = a t^2 + bt + c.$ Since $\tilde{y}'(t) = 2 a t + b$ and $\tilde{y}''(t) = 2a$, substituting into \eqref{eq: simple linear ode example 1} we obtain that the partial solution is 

@@ -58,8 +58,8 @@
 		Analog to how the expression for the \lt of the first derivative was obtained, the same technique can be applied to obtain expressions for the \lt of higher derivatives. For example,
 		\begin{equation}\label{eq: lt of higher derivatives}
 			\begin{aligned}
-				\lop{f''(t)} &= p^2 \lop{f(t)} - f'(0) p - f(0), \\
-				\lop{f'''(t)} &= p^3 \lop{f(t)} - f''(0) p^2 - f'(0) p - f(0), \\
+				\lop{f''(t)} &= p^2 \lop{f(t)} - f(0) p - f'(0), \\
+				\lop{f'''(t)} &= p^3 \lop{f(t)} - f(0) p^2 - f'(0) p - f''(0), \\
 				etc.&~
 			\end{aligned}
 		\end{equation}
@@ -135,7 +135,7 @@
 		\]
 		the \lt is 
 		\begin{equation}\label{eq: lt linear}
-			\lop{\alpha t} = \frac{\alpha}{p}.
+			\lop{\alpha t} = \frac{\alpha}{p^2}.
 		\end{equation}
 		
 		\subsection{Exponential function}
@@ -202,6 +202,43 @@
 	
 	In (\ref*{eq: transfer function}) $U(p)$ is called the transfer function \index{transfer function} of the \ldys. 
 
+	\subsection{Example. Solution of \ode using \lt}
+	Let us again consider \ode \eqref{eq: simple linear ode example 1} with initial conditions  $y(0) = 0, ~y'(0) = 1$. Let us set $\hat{Y} = \hat{Y}(p) = \lop{y(t)}$, then, according to \eqref{eq: lt of higher derivatives} $p \hat{Y} - y(0) = \lop{y'(t)}$ and $p ^2 \hat{Y}- p y(0) - y'(0) = \lop{y''(t)}$. Since $y(0) = 0$ and $y'(0) = 1$ in the example, we have:
+	\begin{equation}
+		\begin{aligned}
+			\lop{y(t)} &= \hat{Y(p)},\\
+			\lop{y'(t)} &= p \hat{Y(p)}, \\
+			\lop{y''(t)} &= p^2 \hat{Y(p)} - 1.
+		\end{aligned}
+	\end{equation}
+	The Laplace image ot the right part function $k t$ is, according to the table \ref{tab: table of laplace transforms} of the Appendix (\#3) $\ds \lop{ k t} = \frac{k}{p ^2}$. In \lt terms, we converted the \de \eqref{eq: simple linear ode example 1} to the following algebraic equation:
+	\begin{equation}\label{eq:example 2 in laplace images}
+		p^2 \hat{Y} - 1 + p \hat{Y} - 2 \hat{Y} = \frac{k}{p ^2},
+	\end{equation}
+	or, after elementary transformations,
+	\begin{equation}
+		\hat{Y} = \frac{k}{p ^2} \cdot \frac{1}{p^2 + p - 2} - \frac{1}{p^2 + p - 2}.
+	\end{equation}
+	
+	Expression $\ds \frac{1}{p^2 + p - 2}$ can be transformed, using the method of undefined coefficients, to the following form:
+	\begin{equation}
+		\frac{1}{p^2 + p - 2} = \frac{1}{3} \cdot \frac{1}{p - 1} - \frac{1}{3} \cdot \frac{1}{p + 2}.
+	\end{equation}
+	Now, to invert the expression \eqref{eq:example 2 in laplace images} (and thus to obtain the solution of the \de as a function of time) we need to perform the following four elementary conversions:
+	\[ 
+	\begin{aligned}
+		\frac{1}{3} \frac{k}{p^2} \cdot \frac{1}{p - 1} &~, \\
+		\frac{1}{3} \frac{k}{p^2} \cdot \frac{1}{p + 2} &~,\\
+		\frac{1}{3}  \cdot  \frac{1}{p - 1} &~,\\
+		\frac{1}{3}  \cdot  \frac{1}{p + 2} &\\
+	\end{aligned}
+	\]
+	and combine them into a sum taking into consideration the signs before each of these terms. The originals of the last two terms are simple exponents (table \ref{tab: table of laplace transforms} of the Appendix (\#8)): $\ds \E^t$ and $\ds \E^{-2t}$ respectively; the originals for the first two terms are also found in table \ref{tab: table of laplace transforms}.
+	
+	After performing all necessary algebraic transformation, we come to the solution we found for this example in \ref{sec:Non-homogeneous equation}:
+	\[ 
+		y(t) = \frac{k + 1}{3} \E^t -\frac{k + 4}{12} \E^{-2t} - \frac{k}{4} (2t + 1).
+	\]
 	\section {Inversion}
 	In the section above description of a \ldys in terms of a differential equation has been reduced to a formally algebraic equation with respect to the Laplacian variable $p$, and this with an arbitrary right-part function. For all practical purposes, however, it is not enough: what we want to know is the \tmp behavior of the solution. In other words, we need convert the Laplace image of a function to the \tmp dependency itself, i.d. to invert the \lt.
 	

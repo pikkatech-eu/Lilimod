@@ -9,7 +9,7 @@
 \renewcommand{\arraystretch}{2.0}
 
 \begin{longtable}{@{} N L R @{}}
-	\caption{Laplace Transforms}\label{tab:laplace} \\[1.0ex]
+	\caption{Laplace Transforms}\label{tab: table of laplace transforms} \\[1.0ex]
 	
 	~ & $F(p)$ & ${f(t)}$ \\[0.6ex]
 	\hline \\[-1.0ex]
@@ -35,6 +35,8 @@
 	\req & $\ds p^{-3/2}$														& $\ds 2 \sqrt{\frac{t}{\pi}}$								\\[1.2ex]
 	\req & $\ds \frac{\Gamma(k)}{p^k}~(k > 0)$									& $\ds t^{k-1}$ 											\\[1.2ex]
 	\req & $\ds \frac{1}{p + a}$												& $\ds \E^{-at}$ 											\\[1.2ex]
+	\req & $\ds \frac{1}{p} \cdot \frac{1}{p + a}$								& $\ds \frac{1}{a} \left(1 - \E^{-at} \right)$ 				\\[1.2ex]
+	\req & $\ds \frac{1}{p^2} \cdot \frac{1}{p + a}$							& $\ds \frac{t}{a} - \frac{1}{a^2} \left(1 - \E^{-at} \right)$ 	\\[1.2ex]
 	\req & $\ds \frac{1}{(p + a)^2}$											& $\ds t \E^{-at}$ 											\\[1.2ex]
 	\req & $\ds \frac{1}{p^2 + a^2}$											& $\ds \frac{1}{a} \sin at$ 								\\[1.2ex]
 	\req & $\ds \frac{p}{p^2 + a^2}$											& $\ds \frac{1}{a} \cos at$ 								\\[1.2ex]

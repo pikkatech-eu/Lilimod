@@ -114,6 +114,19 @@ if __name__ == '__main__':
     def k0_original(t: float) -> float:
         return 0.5 * scipy.special.exp1(k / (t + 0.0001))
 
+    a = -0.1
+    def exponential_growth_image(p: complex) -> complex:
+        return (1 / p) * (1 /(p + a))
+
+    def exponential_growth_original(t: float) -> float:
+        return (1 / a) * (1 - exp(- a * t))
+
+    def exponential_growth_integrated_image(p: complex) -> complex:
+        return (1 / p**2) * (1 /(p + a))
+
+    def exponential_growth_original_integrated(t: float) -> float:
+        return (t / a) - (1 / a**2) * (1 - exp(- a * t))
+
     images              = [
                             exponent_image,
                             sine_image,
@@ -122,7 +135,9 @@ if __name__ == '__main__':
                             exponent_multiplied_image,
                             rectangular_wave_image,
                             rectangular_wave2_image,
-                            k0_image
+                            k0_image,
+                            exponential_growth_image,
+        exponential_growth_integrated_image
                           ]
 
     originals           = [
@@ -133,7 +148,9 @@ if __name__ == '__main__':
                             exponent_multiplied_original,
                             rectangular_wave_origin,
                             rectangular_wave2_origin,
-                            k0_original
+                            k0_original,
+                            exponential_growth_original,
+        exponential_growth_original_integrated
                           ]
 
     titles              = [
@@ -144,7 +161,9 @@ if __name__ == '__main__':
                             "Asymmetric distribution",
                             "Delayed step function",
                             "Rectangular wave",
-                            "Well function"
+                            "Well function",
+                            "Exponential growth",
+        "Exponential growth integrated"
                           ]
 
     original_equations  = [
@@ -155,22 +174,24 @@ if __name__ == '__main__':
                             't * exp(-t)',
                             'H(t-1)',
                             'H(t-1) - H(t-2)',
-                            '0.5 * E1(k/t) / (4 pi)'
+                            '0.5 * E1(k/t) / (4 pi)',
+                            '(1/a) * (1-exp(-at))',
+        't/a - (1/a^2) (1-exp(-at))'
                           ]
 
     dt = 0.05
-    number_of_points =300
-    context_index = 7
+    number_of_points =100
+    context_index = 9
     test_context(images[context_index], originals[context_index], dt, number_of_points, 0, quadrature_order=16,
                  size=(8, 6),
                  max_x= 5,
                  major_step_x = 1,
                  minor_step_x = 0.5,
 
-                 major_step_y=0.1,
-                 minor_step_y=0.05,
-                 min_y=0,
-                 max_y=0.8,
+                 major_step_y=2,
+                 minor_step_y=1,
+                 min_y=-0,
+                 max_y=20,
                  digits_x = 0,
                  digits_y=1,
                  title=titles[context_index],
