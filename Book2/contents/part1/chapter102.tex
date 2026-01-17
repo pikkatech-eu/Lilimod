@@ -552,6 +552,19 @@
 	
 	But, even as with the sine function, the accuracy of the representation of the function's course cannot be compared with that obtained with Stehfest's algorithm. This, again, is a general property of den Iseger's method.
 	
+	\paragraph{Rectangular wave\\}
+	Laplace image: $F(p) = \frac{(\E^{-p} - \E^{-2p})}{p}.$\\
+	Exact Laplace original: $f(t) = H(t-1) - H(t-2).$ \\
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{contents/part1/figures/iseger_rectangular_wave}
+		\caption{Results of numerical Laplace inversion by den Iseger's method for rectangular wave.}
+		\label{fig:isegerrectangularwave}
+	\end{figure}
+	
+	Figure \ref{fig:isegerrectangularwave} shows the results of numerical \lti by den Iseger with $n=16$ for the rectangular wave function. Also in this case, the resulting curve exactly follows the theoretical step function, with the exception of narrow environments of the points of discontinuity (maximum observed deviation with $n=16$  $0.32$). Outside of these environments, the differences from the theoretical values are of the order $10^{-16}$. Like in the case of delayed step, increase in the number of integration nodes will not bring about any decrease of error in the points of discontinuity. Thus, with $n=32$ maximum deviation was 0.627, with $n=48$ it was 0.024.
+		
 	\paragraph{Well function\\}
 	Laplace image: $F(p) = \frac{1}{p} K_0\left( 2 \sqrt{0.8 p} \right).$ Exact Laplace original: $f(t) = 0.5 E_1\left( \frac{0.8}{t} \right).$ \\
 	
