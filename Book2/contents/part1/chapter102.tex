@@ -240,14 +240,184 @@
 		y(t) = \frac{k + 1}{3} \E^t -\frac{k + 4}{12} \E^{-2t} - \frac{k}{4} (2t + 1).
 	\]
 	\section {Inversion}
+	
 	In the section above description of a \ldys in terms of a differential equation has been reduced to a formally algebraic equation with respect to the Laplacian variable $p$, and this with an arbitrary right-part function. For all practical purposes, however, it is not enough: what we want to know is the \tmp behavior of the solution. In other words, we need convert the Laplace image of a function to the \tmp dependency itself, i.d. to invert the \lt.
 	
 	In section \ref{sec:Laplace image examples} we have derived a few elementary correspondences between \tmp functions and their Laplace images: 
 	(\ref{eq:laplace heaviside}) for the Heaviside function, (\ref{eq: lt linear}) for the linear function, (\ref{eq: lt exponent}) for the exponential function, and (\ref{eq:lt delta}) for Dirac's delta function. 
 	
-	Table \ref{tab:laplace} in Appendix contains more cases arises in concrete problems in \gf and similar contexts. There exist, besides, numerous collections of comprehensive inversion tables. Classical sources are, for example, \cite{Bateman_1954}, \cite{oberhettinger_tables_1973}, \cite{Abramowitz1964}, and many others.
+	Table \ref{tab: table of laplace transforms} in Appendix contains more cases arises in concrete problems in \gf and similar contexts. There exist, besides, numerous collections of comprehensive inversion tables. Classical sources are, for example, \cite{Bateman_1954}, \cite{oberhettinger_tables_1973}, \cite{Abramowitz1964}, and many others.
 	
-	\section {Tables}
+	Very often, however, even the most complete tables of \lti do not give an unequivocal answer for a problem. In these cases, numerical inversion of \lt must be used.
+	
+	%\section {Tables}
 	\section {Numerical inversion}
-	\subsection {Stehfest}
+	Despite the fact that the collection of \lt and its inversion is very ample, it is not always possible to find one in existing sources, especially by complicated or exotic \tmp dependencies of external forces. Fortunately, there also exists methods to find the numerical values of a Laplace original if the image is known. This class of methods is known as the numerical inversion of \lt.
+	
+	A great number of methods for the numerical inversion of \lt has been developed in the last decades. The interested reader can find an overview of existing methods, among other publications, in \cite{davies_martin_1979}, \cite{cohen_numerical_2007}, \cite{kuhlman_2013}, \cite{piessens_1975}.
+	
+	According to the author's opinion, however, two methods stand out with respect of practical applications: the method of Harald Stehfest \cite{stehfest_1970} and the method of Peter den Iseger \cite{iseger_2006}. 
+	%In the following sections we will dwell upon these two methods, and on one further historical method of Lev Gokhberg \cite{gokhberg_1982} included rather for private considerations.
+	
+	\subsection {Method of Stehfest}
+	
+	The method of Stehfest uses only the values of \lti om the real axis. This makes it a practical tool, since calculation of the image function with complex arguments causes sometimes greater difficulties. The method is based on an integration formula given by D.P. Gaver \cite{gaver_1966}:
+	
+	\begin{equation}\label{eq:stehfest}
+		f(t) \approx \frac{\log 2}{t} \cdot \sum \limits_{i=1}^N V_i F\left( \frac{\log 2}{t} \cdot i \right),
+	\end{equation}
+	where
+	
+	\begin{description}[labelwidth=4em,leftmargin=!,itemsep=-4pt]
+		\item[$f(t)$] the approximate value of the original at time value $t$,
+		\item[$F(p)$] the Laplace image function,
+		\item[$V_i$] the coefficients of integration in Gaver's equation,
+		\item[$N$] the order of the integration formula.
+	\end{description}
+	
+	The expression for the coefficients $V_i$ is as follows:
+	\begin{equation}\label{eq: gaver coefficients}
+		V_i = (-1)^{i + N/2} \cdot \sum \limits_{k = \left[ \frac{i + 1}{2} \right]}^{\min(i, N/2)} \frac{k^{N/2 + 1} (2k)!}{(N/2 - k)! k! (k-1)! (i-k)! (2k-i)!}
+	\end{equation}
+	
+	Since the coefficients $V_i$ only depend on the value of $N$, so they only need to be calculated once. The value of $N$ must be even.
+	
+	The values of Stehfest's coefficients for a few values of $N$ are given in Table \ref*{tab:Stehfest coefficients}.
+	
+	\begin{table}[H]\label{tab:Stehfest coefficients}
+		\centering
+		\caption{Table of coefficients in Stehfest's inversion method fo a few values of $N$}
+		\begin{tabular}{|r|r|r|r|r|r|r|}
+			\hline
+			i & N=2  & N=4     & N=6     & N=8            & N=10            & N=12\\
+			\hline
+			1 &  2.0 &   -2.0  &     1.0 &      -0.333333 &        0.083333 &  -1.666667e-02 \\
+			2 & -2.0 &   26.0  &   -49.0 &      48.333333 &      -32.083333 &   1.601667e+01 \\
+			3 &      &   -48.0 &   366.0 &    -906.000000 &     1279.000000 &  -1.247000e+03 \\
+			4 &      &    24.0 &  -858.0 &    5464.666667 &   -15623.666667 &   2.755433e+04 \\
+			5 &      &         &   810.0 &  -14376.666667 &    84244.166667 &  -2.632808e+05 \\
+			6 &      &         &  -270.0 &   18730.000000 &  -236957.500000 &   1.324139e+06 \\
+			7 &      &         &         &  -11946.666667 &   375911.666667 &  -3.891706e+06 \\
+			8 &      &         &         &    2986.666667 &  -340071.666667 &   7.053286e+06 \\
+			9 &      &         &         &                &   164062.500000 &  -8.005336e+06 \\
+			10 &     &         &         &                &   -32812.500000 &   5.552830e+06 \\
+			11 &     &         &         &                &                 &  -2.155507e+06 \\
+			12 &     &         &         &                &                 &   3.592512e+05 \\
+			\hline
+		\end{tabular}			
+	\end{table}
+	
+	
+	
+	A Python implementation of Stehfest's algorithm is contained in the \texttt{lilimod} library (\texttt{lilimaths/stehfest.py}).
+	
+	\subsubsection{Examples of application of Stehfest's method}
+	
+	\paragraph{Exponential Decay\\~}
+	Laplace image: $F(p) = \frac{1}{1 + p}.$ Exact Laplace original: $f(t) = \E^{-t}.$ \\
+	
+	The results of numerical inversion are shown in Figure \ref{fig:stehfestexponentialdecay}. In this case, even with a relatively lower value of N=6 the results are already very accurate (maximum absolute deviation 0.0068 with $N=6$ at $t = 3.11.$)
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{contents/part1/figures/stehfest_exponential_decay}
+		\caption{Results of numerical Laplace inversion by Stehfest's method for exponential decay.}
+		\label{fig:stehfestexponentialdecay}
+	\end{figure}
+	
+	\paragraph{Sine function\\}
+	Laplace image: $F(p) = \frac{1}{1 + p^2}.$ Exact Laplace original: $f(t) = \sin t.$ \\
+	
+	The results of numerical inversion for this case shown in Figure \ref{fig:stehfestsine} behave differently as compared with the previous case. Whereas the deviation from the exact function in the beginning of the curve ($0 \leq t \lesssim 1.2 $) are reasonably accurate, accuracy drastically falls as the value of the argument grows. Even with the values of order as high as 22, the deviation from the exact solution becomes too high already after the first full oscillation (maximum absolute deviation 0.0339 with $N=22$ at $t = 5.01.$).		
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{contents/part1/figures/stehfest_sine}
+		\caption{Results of numerical Laplace inversion by Stehfest's method for sine function.}
+		\label{fig:stehfestsine}
+	\end{figure}
+	
+	\paragraph{Damped sine function\\}
+	Laplace image: $F(p) = \frac{1}{1 + (p+0.2)^2}.$ Exact Laplace original: $f(t) = \E^{-0.2 t}\sin t.$ \\
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{contents/part1/figures/stehfest_damped_sine}
+		\caption{Results of numerical Laplace inversion by Stehfest's method for damped sine function.}
+		\label{fig:stehfestdampedsine}
+	\end{figure}
+	
+	The results of numerical inversion for the damped sine curve are shown in Figure \ref{fig:stehfestdampedsine}. Adding a little damping to the process improves the convergence, to an extent, as can bee seen from the behavior of the curves. Nevertheless, the deviations from the exact curve are still significant and tend to become greater as long as the value of time grows  (maximum absolute deviation 0.00311 with $N=22$ at $t = 4.71.$).		
+	
+	\paragraph{Linear growth\\}
+	Laplace image: $F(p) = \frac{1}{p^2}.$ Exact Laplace original: $f(t) = t.$ \\
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{contents/part1/figures/stehfest_linear_growth}
+		\caption{Results of numerical Laplace inversion by Stehfest's method for linear function.}
+		\label{fig:stehfestlineargrowth}
+	\end{figure}
+	
+	The results of numerical inversion are shown in Figure \ref{fig:stehfestlineargrowth}. For the case of linear function, even with a relatively lower value of N=6 the results are already very accurate (maximum absolute deviation 0.0107 with $N=6$ at $t = 5.01.$, $4.84 \cdot 10^{-6}$ with $N = 12$).		
+	
+	
+	\paragraph{Asymmetric distribution\\}
+	Laplace image: $F(p) = \frac{1}{(p + 1)^2}.$ Exact Laplace original: $f(t) = t \E^{-t}.$ \\
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{contents/part1/figures/stehfest_asymmetric_distribution}
+		\caption{Results of numerical Laplace inversion by Stehfest's method for asymmetric distribution.}
+		\label{fig:stehfestasymmetricdistribution}
+	\end{figure}
+	
+	The results of numerical inversion are shown in Figure \ref{fig:stehfestasymmetricdistribution}. As can bee seen, the results become reasonably accurate with the values of $N \geq 10$ (maximum absolute deviation 0.00191 with $N=10$ at $t = 4.36.$).		
+	
+	
+	\paragraph{Delayed unitary step\\}
+	Laplace image: $F(p) = \frac{\E^{-p}}{p}.$ Exact Laplace original: $f(t) = H(t-1).$ \\
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{contents/part1/figures/stehfest_delayed_step}
+		\caption{Results of numerical Laplace inversion by Stehfest's method for delayed unitary step.}
+		\label{fig:stehfestdelayedstep}
+	\end{figure}
+	
+	The results of numerical inversion are shown in Figure \ref{fig:stehfestdelayedstep}. Although the accuracy of the computed values of $f(t)$ with big values of time $t \geq 2.5 $can be considered as more or less accurate, behavior of the calculate curves in the vicinity of the original's breakpoint at $t = 1.$ This behavior cannot be improved by increasing of the order of integration. As can be seen from Table \ref{tab:Stehfest coefficients} the values if coefficients rapidly grow to very big values, as the order $N$ grows, which causes numerical instability due to rounding errors in the machine representation of float numbers.
+	
+	\paragraph{Rectangular wave\\}
+	Laplace image: $F(p) = \frac{(\E^{-p} - \E^{-2p})}{p}.$ Exact Laplace original: $f(t) = H(t-1) - H(t-2).$ \\
+	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{contents/part1/figures/stehfest_rectanhular_wave}
+		\caption{Results of numerical Laplace inversion by Stehfest's method for rectangular wave}
+		\label{fig:stehfestrectanhularwave}
+	\end{figure}
+	
+	Like in the case of delayed step, the behavior of the Stehfest approximated originals is far from satisfactory. Whereas in the vicinity of $t=0$ and with gig values of time the accuracy can be considered acceptable, the form of rectangular wave cannot be computed by Stehfest integration method. In this particular case, even the value of integration order as high as 26 did not do better. Further increase in the value of $N$ creates numerical instability, as is shown in Figure \ref{fig:stehfestrectanhularwaveunstable}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{contents/part1/figures/stehfest_rectanhular_wave_unstable}
+		\caption{Numerical instability of Stehfest's method for rectangular wave with too high values of integration order.}
+		\label{fig:stehfestrectanhularwaveunstable}
+	\end{figure}
+	
+	Setting $N=28$ for the previous example created numerical instability illustrated by the chaotic cloud of black points in the right part of the graph in Figure \ref{fig:stehfestrectanhularwaveunstable}.
+	
+	\paragraph{Well function\\}
+	Laplace image: $F(p) = \frac{1}{p} K_0\left( 2 \sqrt{0.8 p} \right).$ Exact Laplace original: $f(t) = 0.5 E_1\left( \frac{0.8}{t} \right).$ \\
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{contents/part1/figures/stehfest_well_function}
+		\caption{Results of numerical Laplace inversion by Stehfest's method for the well function}
+		\label{fig:stehfestwellfunction}
+	\end{figure}
+	
+	The results of numerical inversion are shown in Figure \ref{fig:stehfestwellfunction}. As can bee seen, the results become quite accurate already with the values of $N \geq 6$ (maximum absolute deviation 0.0021 with $N=6$ at $t = 1.01.$).		
+	
 	\subsection {den Iseger}
