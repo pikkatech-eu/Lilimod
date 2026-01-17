@@ -420,4 +420,146 @@
 	
 	The results of numerical inversion are shown in Figure \ref{fig:stehfestwellfunction}. As can bee seen, the results become quite accurate already with the values of $N \geq 6$ (maximum absolute deviation 0.0021 with $N=6$ at $t = 1.01.$).		
 	
-	\subsection {den Iseger}
+	\subsection {Method of den Iseger}
+	
+	The method of den Iseger \cite{iseger_2006} realizes a version of Gaussian quadrature with complex values of the integrated function. Below is presented the algorithm of den Iseger's method according to \cite{tijms_2003}, for the mathematical intricacies the interested reader can look up the seminal paper \cite{iseger_2006} itself.
+	
+	The idea of den Iseger's method is the approximation of the original function $f(t)$ for the values of the time argument $t_k = k \Delta$, where $\Delta$ is the time step and $k = 0, ..., M-1,$ $M$ being the desired number of steps ($\Delta \cdot (M-1) = t_{fin},$) $t_{fin}$ the length of the time interval. The values $f(t_k)$ are approximated as 
+	\begin{equation}\label{eq:tijms basic sum}
+		f(t_k) \approx \frac{\E^{b k}}{\Delta} \sum \limits_{j=1}^n \alpha_j \int \limits_{-1}^1 \mathrm{Re} \left[ F(\frac{b + i \lambda_j + i \pi t}{\Delta}) \right] \cdot \cos \left( \pi k (t + 1) \right) dt,
+	\end{equation}
+	
+	where $i = \sqrt{-1}.$ The values of $b$ and $n$ in (\ref{eq:tijms basic sum}) must be chosen appropriately (see below). The values $\lambda_j$ and $\alpha_j$ are the abscissae and the weights of the integration formula that only depend on n. To practically calculate using equation (\ref{eq:tijms basic sum}), the following algorithm is suggested:
+	\paragraph{Input:} $F(p)$: Laplace image function; $\Delta$: time step; $M$: number of time points.
+	\paragraph{Step 1} For $q = 0, ..., 2m$ and $j = 1, ..., n$ calculate
+	\begin{equation}
+		F_{jq} = \mathrm{Re} \left[ F \left( \frac{b + i \lambda_j + i \pi (q / m - 1)}{\Delta} \right) \right]
+	\end{equation}
+	and
+	\begin{equation}
+		F_q = \sum \limits_{j=1}^n \alpha_j F_{jq}, ~ q = 0, ... , 2m.
+	\end{equation}
+	
+	\noindent Then let 
+	\begin{equation}
+		\hat g_k = F_k, ~ k = 1, ..., 2m - 1, ~ \hat g_0 = \frac{1}{2} (F_0 + F_{2m}).
+	\end{equation}
+	
+	\paragraph{Step 2} Apply the inverse Fast Fourier Transform method to the vector $(\hat g_0, ..., \hat g_{2m-1})$. The result is the vector $(g_0, ..., g_{2m-1}).$
+	
+	\paragraph{Step 3} The resulting values of the original are
+	\begin{equation}
+		f(k \Delta) = \frac{2 \E^{b k}}{\Delta} \cdot g_k, k = 0, ..., M - 1.
+	\end{equation}
+	
+	\paragraph{Selection of the values $b$ and $m$\\}
+	To obtain best results, is is recommended \cite{tijms_2003} to select the value of $M$ as a power of 2. Then the value of $m$ is set to
+	\begin{equation}
+		m = 4 M
+	\end{equation}
+	and
+	\begin{equation}
+		b = \frac{22}{m}.
+	\end{equation}
+	The latter equation is derived as the result of numerical experiments \cite{tijms_2003}.
+	
+	As will be illustrated in the examples below, the accuracy of den Iseger's method is overwhelming, even for 'bad behaved' functions. As is indicated in \cite{tijms_2003}, for smooth originals it is sufficient to limit the number of integration nodes in (\ref{eq:tijms basic sum}) to 8, or to 16 otherwise. 
+	
+	The values of the  abscissae $\lambda_j$ and the weights $\alpha_j$ for $n = 8$ and $n=16$ are given in Table \ref{tab:den Iseger summation coefficients}.
+	
+	\begin{table}[H]\label{tab:den Iseger summation coefficients}
+		\centering
+		\caption{Abscissae and weights for den Iseger's summation formula}
+		$n = 8$ ~\\~\\
+		\begin{tabular}{|r|c|c|}
+			\hline
+			$j$	& $\alpha_j$			   & $\lambda_j$ \\
+			\hline
+			1 & 2.00000000000000000000E+00 & 3.14159265358979323846E+00\\
+			2 & 2.00000000000009194165E+00 & 9.42477796076939341796E+00\\
+			3 & 2.00000030233693694331E+00 & 1.57079633498486685135E+01\\
+			4 & 2.00163683400961269435E+00 & 2.19918840702852034226E+01\\
+			5 & 2.19160665410378500033E+00 & 2.84288098692614839228E+01\\
+			6 & 4.01375304677448905244E+00 & 3.74385643171158002866E+01\\
+			7 & 1.18855502586988811981E+01 & 5.93141454252504427542E+01\\
+			8 & 1.09907452904076203170E+02 & 1.73674723843715552399E+02\\
+			\hline
+		\end{tabular}
+		
+		~\\$n = 16$ \\~\\
+		\begin{tabular}{|r|c|c|}
+			\hline
+			$j$	& $\alpha_j$			   & $\lambda_j$ \\
+			\hline
+			1 & 2.00000000000000000000E+00 & 3.14159265358979323846E+00\\
+			2 & 2.00000000000000000000E+00 & 9.42477796076937971539E+00\\
+			3 & 2.00000000000000000000E+00 & 1.57079632679489661923E+01\\
+			4 & 2.00000000000000000000E+00 & 2.19911485751285526692E+01\\
+			5 & 2.00000000000000025539E+00 & 2.82743338823081392079E+01\\
+			6 & 2.00000000001790585116E+00 & 3.45575191894933477513E+01\\
+			7 & 2.00000009630928117646E+00 & 4.08407045355964511919E+01\\
+			8 & 2.00006881371091937456E+00 & 4.71239261219868564304E+01\\
+			9 & 2.00840809734614010315E+00 & 5.34131955661131603664E+01\\
+			10 & 2.18638923693363504375E+00 & 5.99000285454941069650E+01\\
+			11 & 3.03057284932114460466E+00 & 6.78685456453781178352E+01\\
+			12 & 4.82641532934280440182E+00 & 7.99199036559694718061E+01\\
+			13 & 8.33376254184457094255E+00 & 9.99196221424608443952E+01\\
+			14 & 1.67554002625922470539E+01 & 1.37139145843604237972E+02\\
+			15 & 4.72109360166038325036E+01 & 2.25669154692295029965E+02\\
+			16 & 4.27648046755977518689E+02 & 6.72791727521303673697E+02\\
+			\hline
+		\end{tabular}			
+	\end{table}
+	
+	A Python implementation of den Iseger's algorithm is contained in the \texttt{lilimod} library \\
+	(\texttt{lilimaths/iseger.py})\footnote{In the Python routine, summation coefficients are provided for for the values of $n=16, 32, 48$}.
+	
+	\subsubsection{Examples of application of den Iseger's method}
+	\paragraph{Exponential Decay\\~}
+	Laplace image: $F(p) = \frac{1}{1 + p}.$ Exact Laplace original: $f(t) = \E^{-t}.$ \\
+	
+	Figure \ref{fig:isegerexponentialdecay} shows the results of numerical \lti by den Iseger with $n=16$ for exponential decay. Maximum deviation from the exact value was $1.1 \cdot 10^{-14}.$
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{contents/part1/figures/iseger_exponential_decay}
+		\caption{Results of numerical Laplace inversion by den Iseger's method for exponential decay.}
+		\label{fig:isegerexponentialdecay}
+	\end{figure}
+	
+	\paragraph{Sine function\\}
+	Laplace image: $F(p) = \frac{1}{1 + p^2}.$ Exact Laplace original: $f(t) = \sin t.$ \\
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{contents/part1/figures/iseger_sine}
+		\caption{Results of numerical Laplace inversion by den Iseger's method for the sine function.}
+		\label{fig:isegersine}
+	\end{figure}
+	
+	Figure \ref{fig:isegersine} shows the results of numerical \lti by den Iseger with $n=16$ for the sine function. The difference of this curve from that obtained for the same image by means of Stehfest's algorithm is not only quantitative (maximum deviation was $6.7 \cdot 10^{-15}$): the behavior of the calculated curve follows the exact solution within the whole interval. This is the principal difference of den Iseger's method from those that, like Stehfest's algorithm, only use the values of the image on the real axis.
+	
+	\paragraph{Delayed unitary step\\}
+	Laplace image: $F(p) = \frac{\E^{-p}}{p}.$ Exact Laplace original: $f(t) = H(t-1).$ \\
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{contents/part1/figures/iseger_delayed_step}
+		\caption{Results of numerical Laplace inversion by den Iseger's method for the delayed unitary step.}
+		\label{fig:isegerdelayedstep}
+	\end{figure}
+	
+	Figure \ref{fig:isegerdelayedstep} shows the results of numerical \lti by den Iseger with $n=16$ for the delayed step function. As in the case with the sine function, the resulting curve exactly follows the theoretical step function. Maximum deviation with $n=16$ was $0.037$ (which corresponds to one of the points of discontinuity, but cannot be seen in the figure). Generally, the differences from the theoretical values outside the vicinity of $t=1$ (discontinuity) are in the order of $10^{-16}$, in the points of discontinuity itself it can be much greater and will not decrease with greater values of $n$. Thus, with $n=32$ maximum deviation was 0.627, with $n=48$ it was 0.024.
+	
+	But, even as with the sine function, the accuracy of the representation of the function's course cannot be compared with that obtained with Stehfest's algorithm. This, again, is a general property of den Iseger's method.
+	
+	\paragraph{Well function\\}
+	Laplace image: $F(p) = \frac{1}{p} K_0\left( 2 \sqrt{0.8 p} \right).$ Exact Laplace original: $f(t) = 0.5 E_1\left( \frac{0.8}{t} \right).$ \\
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{contents/part1/figures/iseger_well_function}
+		\caption{Results of numerical Laplace inversion by den Iseger's method for the well function.}
+		\label{fig:isegerwellfunction}
+	\end{figure}
+	
+	Figure \ref{fig:isegersine} shows the results of numerical \lti by den Iseger with $n=16$ for the well function. The maximum deviation from the exact curve is in this case $2.3 \cdot 10^{-5}$, which is though accurate enough for all practical purposes, is lower that in the case of other "smooth" functions. The reason is probably that the values of the modified Bessel function of complex argument were computed with lesser accuracy that those for elementary functions.
